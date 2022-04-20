@@ -1,0 +1,6 @@
+#include "scanpic.h"
+#include<QtNetwork/QNetworkAccessManager>
+scanPic::scanPic()
+{
+    
+}
