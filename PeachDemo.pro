@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT+= network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,14 +28,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    scanpic.cpp \
+    opticalsever.cpp \
         widget.cpp \
     appinit.cpp \
     mymessagebox.cpp
 
 HEADERS += \
     httpSDK-cpp/ocr.h \
-    scanpic.h \
+    opticalsever.h \
         widget.h \
     appinit.h \
     mymessagebox.h
@@ -45,3 +46,23 @@ FORMS += \
 
 RESOURCES += \
     qss.qrc
+
+
+## 添加的外部库json
+#win32:CONFIG(release, debug|release): LIBS += -L'C:/Program Files (x86)/jsoncpp/lib/' -ljsoncpp_static
+#else:win32:CONFIG(debug, debug|release): LIBS += -L'C:/Program Files (x86)/jsoncpp/lib/' -ljsoncpp_staticd
+
+#INCLUDEPATH += 'C:/Program Files (x86)/jsoncpp/include'
+#DEPENDPATH += 'C:/Program Files (x86)/jsoncpp/include'
+
+## 添加的外部库curl
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../temp_download/curl-7.82.0/mybuild/lib/release/ -llibcurl_imp
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../temp_download/curl-7.82.0/mybuild/lib/debug/ -llibcurl_imp
+
+#INCLUDEPATH += $$PWD/../../../temp_download/curl-7.82.0/mybuild/lib/Release
+#DEPENDPATH += $$PWD/../../../temp_download/curl-7.82.0/mybuild/lib/Release
+
+
+
+
+

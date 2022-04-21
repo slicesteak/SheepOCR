@@ -7,6 +7,7 @@
 #include <QCloseEvent>
 #include <QMenu>
 #include <QAction>
+#include"opticalsever.h"
 //自定义弹窗
 #include "mymessagebox.h"
 
@@ -39,6 +40,8 @@ private slots:
 
     void on_btn_littleshow_clicked();
 
+    void on_btn_menu_item_3_clicked();
+
 private:
     Ui::Widget *ui;
 
@@ -56,6 +59,11 @@ private:
     void initUi();          //Ui界面初始化函数
     void initMember();      //成员变量初始化函数
     void littleShow();      //最小化显示函数
+
+    OpticalSever myOCR;
+
+private slots:
+    void getres();
 };
 
 #endif // WIDGET_H

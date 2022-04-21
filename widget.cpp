@@ -1,7 +1,7 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include <QGraphicsDropShadowEffect>
-
+#include<QtDebug>
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
@@ -10,6 +10,8 @@ Widget::Widget(QWidget *parent) :
     this->setProperty("canMove",true);
     this->initUi();
     this->initMember();
+
+    //connect(OpticalSever::manager,&QNetworkAccessManager::finished,this,&Widget::postBack);//通信完成后，自动执行getBack
 }
 
 Widget::~Widget()
@@ -134,3 +136,24 @@ void Widget::on_btn_littleshow_clicked()
 {
     showMinimized();
 }
+
+void Widget::on_btn_menu_item_3_clicked()
+{
+//    ui->picPath->setText("C:\\Users\\lenov\\Desktop\\why.png");
+
+    connect(myOCR.manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getres()));
+    QString path=ui->picPath->toPlainText();
+//    qDebug()<<path;
+    myOCR.scanPic(path);
+    myOCR.sendRequest();    
+
+}
+
+void Widget::getres(){
+//    qDebug()<<"QSslSocket="<<QSslSocket::sslLibraryBuildVersionString();
+//    qDebug() << "OpenSSL支持情况:" << QSslSocket::supportsSsl();
+    myOCR.receiveResult();
+    qDebug()<<"get the result"<<myOCR.result;
+    ui->lab_mess_1->setText(myOCR.result);
+}
+

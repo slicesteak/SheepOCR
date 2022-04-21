@@ -7,6 +7,9 @@ jsoncpp/
 httpSDK*/
 lib/
 CURL/
+OpenSSL/
+OCR-test/*
+*.autosave
 
 # User-specific files
 *.rsuser
