@@ -135,7 +135,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Peach</string>
+                 <string>OCR</string>
                 </property>
                </widget>
               </item>
@@ -277,7 +277,7 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>$ itemMess</string>
+                  <string>我是一颗小树</string>
                  </property>
                 </widget>
                </item>
@@ -304,7 +304,7 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>2001</string>
+                  <string>111</string>
                  </property>
                 </widget>
                </item>
@@ -312,7 +312,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QTextEdit" name="picPath"/>
+             <widget class="QTextEdit" name="picPath">
+              <property name="placeholderText">
+               <string>请输入你的文件地址</string>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QWidget" name="w_item_02" native="true">
@@ -350,7 +354,7 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>$ itemMess</string>
+                  <string>我是一颗小花</string>
                  </property>
                 </widget>
                </item>
@@ -377,7 +381,7 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>19999</string>
+                  <string>111</string>
                  </property>
                 </widget>
                </item>
@@ -433,7 +437,7 @@
                </font>
               </property>
               <property name="text">
-               <string>Services</string>
+               <string>功能</string>
               </property>
              </widget>
             </item>
@@ -462,7 +466,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Insurance</string>
+                 <string>上传</string>
                 </property>
                 <property name="icon">
                  <iconset resource="qss.qrc">
@@ -493,7 +497,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Media</string>
+                 <string>帮助</string>
                 </property>
                 <property name="icon">
                  <iconset resource="qss.qrc">
@@ -524,7 +528,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Utility</string>
+                 <string>翻译</string>
                 </property>
                 <property name="icon">
                  <iconset resource="qss.qrc">
@@ -555,7 +559,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Payments</string>
+                 <string>识别</string>
                 </property>
                 <property name="icon">
                  <iconset resource="qss.qrc">
@@ -586,7 +590,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Transfers</string>
+                 <string>保存</string>
                 </property>
                 <property name="icon">
                  <iconset resource="qss.qrc">
@@ -617,7 +621,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Add Other</string>
+                 <string>悬浮</string>
                 </property>
                 <property name="toolButtonStyle">
                  <enum>Qt::ToolButtonTextUnderIcon</enum>
@@ -822,7 +826,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Dashboard</string>
+              <string>识别结果</string>
              </property>
             </widget>
            </item>
@@ -848,7 +852,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Expenses</string>
+              <string>识别选项</string>
              </property>
             </widget>
            </item>
@@ -874,7 +878,7 @@
               </font>
              </property>
              <property name="text">
-              <string>History</string>
+              <string>翻译结果</string>
              </property>
             </widget>
            </item>
@@ -900,7 +904,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Actions</string>
+              <string>翻译选项</string>
              </property>
             </widget>
            </item>
@@ -921,8 +925,14 @@
          </item>
          <item>
           <widget class="QStackedWidget" name="sw_main">
+           <property name="font">
+            <font>
+             <family>Agency FB</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="page">
             <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -930,6 +940,7 @@
               <widget class="QLabel" name="lab_mess_1">
                <property name="font">
                 <font>
+                 <family>Agency FB</family>
                  <pointsize>20</pointsize>
                  <weight>75</weight>
                  <bold>true</bold>
@@ -939,7 +950,7 @@
                 <enum>Qt::LeftToRight</enum>
                </property>
                <property name="text">
-                <string>Dashboard</string>
+                <string>识别结果</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -951,23 +962,285 @@
            <widget class="QWidget" name="page_2">
             <layout class="QVBoxLayout" name="verticalLayout_8">
              <item>
-              <widget class="QLabel" name="lab_mess_2">
+              <widget class="QGroupBox" name="groupBox">
                <property name="font">
                 <font>
-                 <pointsize>20</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
+                 <family>Agency FB</family>
+                 <pointsize>16</pointsize>
                 </font>
                </property>
-               <property name="layoutDirection">
-                <enum>Qt::LeftToRight</enum>
+               <property name="title">
+                <string>请选择您的识别类型</string>
                </property>
-               <property name="text">
-                <string>Expenses</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
+               <widget class="QRadioButton" name="radioButton">
+                <property name="geometry">
+                 <rect>
+                  <x>30</x>
+                  <y>60</y>
+                  <width>271</width>
+                  <height>19</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Agency FB</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>通用文字识别（高精度版）</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton_2">
+                <property name="geometry">
+                 <rect>
+                  <x>30</x>
+                  <y>200</y>
+                  <width>271</width>
+                  <height>19</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Agency FB</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>通用文字识别（标准版）</string>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton_3">
+                <property name="geometry">
+                 <rect>
+                  <x>30</x>
+                  <y>130</y>
+                  <width>321</width>
+                  <height>19</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Agency FB</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>通用文字识别（高精度含位置版）</string>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton_4">
+                <property name="geometry">
+                 <rect>
+                  <x>30</x>
+                  <y>270</y>
+                  <width>301</width>
+                  <height>19</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Agency FB</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>通用文字识别（标准含位置版）</string>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton_5">
+                <property name="geometry">
+                 <rect>
+                  <x>380</x>
+                  <y>340</y>
+                  <width>115</width>
+                  <height>19</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Agency FB</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>印章识别</string>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton_6">
+                <property name="geometry">
+                 <rect>
+                  <x>380</x>
+                  <y>270</y>
+                  <width>261</width>
+                  <height>19</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Agency FB</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>表格文字识别（同步接口）</string>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton_7">
+                <property name="geometry">
+                 <rect>
+                  <x>380</x>
+                  <y>200</y>
+                  <width>331</width>
+                  <height>19</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Agency FB</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>表格文字识别（异步接口）</string>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton_8">
+                <property name="geometry">
+                 <rect>
+                  <x>380</x>
+                  <y>130</y>
+                  <width>221</width>
+                  <height>19</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Agency FB</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>表格文字识别V2</string>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton_9">
+                <property name="geometry">
+                 <rect>
+                  <x>30</x>
+                  <y>470</y>
+                  <width>321</width>
+                  <height>19</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Agency FB</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>网络图片文字识别（含位置版）</string>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton_10">
+                <property name="geometry">
+                 <rect>
+                  <x>380</x>
+                  <y>60</y>
+                  <width>161</width>
+                  <height>19</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Agency FB</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>手写文字识别</string>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton_11">
+                <property name="geometry">
+                 <rect>
+                  <x>30</x>
+                  <y>410</y>
+                  <width>271</width>
+                  <height>19</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Agency FB</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>网络图片文字识别</string>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton_12">
+                <property name="geometry">
+                 <rect>
+                  <x>30</x>
+                  <y>340</y>
+                  <width>191</width>
+                  <height>19</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Agency FB</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>办公文档识别</string>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton_13">
+                <property name="geometry">
+                 <rect>
+                  <x>380</x>
+                  <y>410</y>
+                  <width>115</width>
+                  <height>19</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Agency FB</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>数字识别</string>
+                </property>
+               </widget>
+               <widget class="QRadioButton" name="radioButton_14">
+                <property name="geometry">
+                 <rect>
+                  <x>380</x>
+                  <y>470</y>
+                  <width>171</width>
+                  <height>19</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Agency FB</family>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>二维码识别</string>
+                </property>
+               </widget>
               </widget>
              </item>
             </layout>
@@ -978,6 +1251,7 @@
               <widget class="QLabel" name="lab_mess_3">
                <property name="font">
                 <font>
+                 <family>Agency FB</family>
                  <pointsize>20</pointsize>
                  <weight>75</weight>
                  <bold>true</bold>
@@ -987,7 +1261,7 @@
                 <enum>Qt::LeftToRight</enum>
                </property>
                <property name="text">
-                <string>History</string>
+                <string>翻译结果</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -1002,6 +1276,7 @@
               <widget class="QLabel" name="lab_mess_4">
                <property name="font">
                 <font>
+                 <family>Agency FB</family>
                  <pointsize>20</pointsize>
                  <weight>75</weight>
                  <bold>true</bold>
@@ -1011,7 +1286,7 @@
                 <enum>Qt::LeftToRight</enum>
                </property>
                <property name="text">
-                <string>Actions</string>
+                <string>翻译选项</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>

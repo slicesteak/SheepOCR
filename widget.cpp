@@ -11,6 +11,7 @@ Widget::Widget(QWidget *parent) :
     this->initUi();
     this->initMember();
 
+
     //通信完成后，自动执行getBack
     connect(myOCR.manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getres()));
     //解除绑定
@@ -45,6 +46,22 @@ void Widget::initUi()
     QPixmap item2(":/icons/item_02.png");
     ui->lab_item_01->setPixmap(item1);
     ui->lab_item_02->setPixmap(item2);
+
+
+    ui->radioButton->setToolTip("在通用文字识别的基础上，提供更高精度的识别服务，支持更多语种识别（丹麦语、荷兰语、马来语、瑞典语、印尼语、波兰语、罗马尼亚语、土耳其语、希腊语、匈牙利语、泰语、越语、阿拉伯语、印地语及部分中国少数民族语言），并将字库从1w+扩展到2w+，能识别所有常用字和大部分生僻字。");
+    ui->radioButton_3->setToolTip("提供多场景、多语种、高精度的整图文字检测和识别服务，支持生僻字识别，并支持 25 种语言识别，\n相对于通用文字识别（含位置信息版）该产品精度更高，但是识别耗时会稍长。");
+    ui->radioButton_2->setToolTip("基于业界领先的深度学习技术，提供多场景、多语种、高精度的整图文字检测和识别服务，\n多项ICDAR指标居世界第一。");
+    ui->radioButton_4->setToolTip("基于业界领先的深度学习技术，提供多场景、多语种、高精度的整图文字检测和识别服务。\n在通用文字识别的基础上，返回文字在图片中的位置信息，方便用户进行版式的二次处理。");
+    ui->radioButton_12->setToolTip("可对办公类文档版面进行分析，输出图、表、标题、文本的位置，并输出分版块内容的OCR识别结果，\n支持中、英两种语言，手写、印刷体混排多种场景。");
+    ui->radioButton_11->setToolTip("针对网络图片进行专项优化，\n支持识别艺术字体或背景复杂的文字内容。");
+    ui->radioButton_9->setToolTip("支持识别艺术字体或背景复杂的文字内容，除文字信息外，\n还可返回每行文字的位置信息、行置信度，以及单字符内容和位置等。");
+    ui->radioButton_10->setToolTip("支持对图片中的手写中文、手写数字进行检测和识别，\n针对不规则的手写字体进行专项优化，识别准确率可达90%以上。");
+    ui->radioButton_8->setToolTip("支持识别图片/PDF格式文档中的表格内容，返回各表格的表头表尾内容、\n单元格文字内容及其行列位置信息，全面覆盖各类表格样式，\n包括常规有线表格、无线表格、含合并单元格表格。\n同时，支持多表格内容识别。");
+    ui->radioButton_7->setToolTip("对图片中的表格文字内容进行提取和识别，结构化输出表头、表尾及每个单元格的文字内容。\n支持识别常规表格及含合并单元格表格，并可选择以JSON或Excel形式进行返回。");
+    ui->radioButton_6->setToolTip("支持识别表格线齐全的常规表格和无框线表格的单元格内容，结构化输出表头、\n表尾及每个单元格的文字内容。 本接口为同步接口，\n相比于异步接口，本接口在请求后会实时返回请求结果。");
+    ui->radioButton_5->setToolTip("检测并识别合同文件或常用票据中的印章，输出文字内容、印章位置信息以及相关置信度，\n已支持圆形章、椭圆形章、方形章等常见印章检测与识别。");
+    ui->radioButton_13->setToolTip("对图片中的数字进行提取和识别，自动过滤非数字内容，\n仅返回数字内容及其位置信息，识别准确率超过99%。");
+    ui->radioButton_14->setToolTip("对图片中的二维码、条形码进行检测和识别，返回存储的文字信息及其位置信息。");
 }
 
 void Widget::initMember()

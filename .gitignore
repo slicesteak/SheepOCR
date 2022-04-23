@@ -10,7 +10,11 @@ CURL/
 OpenSSL/
 OCR-test/*
 *.autosave
+
 ./response.json
+
+PeachDemo.pro.user.*
+
 
 
 # User-specific files
