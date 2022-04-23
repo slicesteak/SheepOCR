@@ -4,18 +4,13 @@
 #include<QtDebug>
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Widget)
+    ui(new Ui::Widget),myOCR(0)
 {
     ui->setupUi(this);
     this->setProperty("canMove",true);
     this->initUi();
     this->initMember();
 
-
-    //通信完成后，自动执行getBack
-    connect(myOCR.manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getres()));
-    //解除绑定
-    //disconnect(myOCR.manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getres()));
 }
 
 Widget::~Widget()
@@ -159,32 +154,11 @@ void Widget::on_btn_littleshow_clicked()
 
 void Widget::on_btn_menu_item_3_clicked()
 {
-
-    QString path=ui->picPath->toPlainText();
-//    qDebug()<<path;
-    QFile myfile(path);
-    if(myfile.exists())
-    {
-        myOCR.scanPic(path);
-        myOCR.sendRequest();
-    }
-    else
-    {
-        myMbox->setIcon("question");                      //设置图标，可选值：check（确定）、question（疑问）、warn（警告）、error（报错）
-        myMbox->setBodyText("文件 "+path+" 不存在，请重新输入路径");            //设置正文内容
-        myMbox->setButtonText("确定");                     //设置单个按钮
-        myMbox->setButtonText("确定","取消");               //设置两个按钮
-        myMbox->exec();                                   //激活弹窗
-    }
-
-}
-
-void Widget::getres(){
-//    qDebug()<<"QSslSocket="<<QSslSocket::sslLibraryBuildVersionString();
-//    qDebug() << "OpenSSL支持情况:" << QSslSocket::supportsSsl();
-    myOCR.receiveResult();
-    qDebug()<<"get the result"<<myOCR.result;
+    myOCR.configOption.path=ui->picPath->toPlainText();
+    //myOCR.configOption.mode=MODE_ACCURATE_BASIC;  //默认情况下是通用文字识别
+    myOCR.start();
     ui->lab_mess_1->setText(myOCR.result);
-    //myOCR.result.clear();
 }
+
+
 

@@ -63,7 +63,7 @@ private:
     OpticalSever myOCR;
 
 private slots:
-    void getres();
+    
 };
 
 #endif // WIDGET_H
