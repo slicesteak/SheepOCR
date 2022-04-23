@@ -10,6 +10,8 @@ CURL/
 OpenSSL/
 OCR-test/*
 *.autosave
+PeachDemo.pro.user.*
+
 
 # User-specific files
 *.rsuser
