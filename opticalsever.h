@@ -40,7 +40,7 @@ public:
     QString scanPic(QString path); //识别图片，将图片转base64
     void setConfig();  //设置识别选项
     void sendRequest();  //发送请求
-    QString receiveResult();  //接收返回结果,并将结果保存
+    void receiveResult();  //接收返回结果,并将结果保存
     void update();  //更新token
     QString result;
 

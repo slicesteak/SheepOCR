@@ -10,6 +10,8 @@ CURL/
 OpenSSL/
 OCR-test/*
 *.autosave
+./response.json
+
 
 # User-specific files
 *.rsuser

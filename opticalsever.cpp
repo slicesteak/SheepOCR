@@ -13,8 +13,6 @@ Option::Option():app_id("25882743")
 OpticalSever::OpticalSever()
 {
     manager=new QNetworkAccessManager();
-
-
 }
 
 
@@ -23,11 +21,10 @@ QString OpticalSever::scanPic(QString path)
     QImage img(path);
     QByteArray imageData;
     QBuffer buffer(&imageData);
-    img.save(&buffer,"png");   //为什么删掉就跑不了？？
+    img.save(&buffer,"png");
     this->imgBase64 = imageData.toBase64();
     buffer.close();
     return "";
-
 }
 
 void OpticalSever::setConfig()
@@ -47,99 +44,43 @@ void OpticalSever::sendRequest()
     QByteArray body;
     body.append("image=");
     body.append(QUrl::toPercentEncoding(imgBase64));
-//    body.append(imgBase64);
-    //qDebug()<<QUrl::toPercentEncoding(imgBase64);
-
-    reply=manager->post(request,body);//
-
-
-
-
-//    QHttpMultiPart *mulPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
-
-//    QHttpPart part1;
-//    part1.setRawHeader("Content-Type","application/x-www-form-urlencoded");
-//    part1.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(QString("form-data;name=\"%1\"").arg("image")));
-//    part1.setBody(QUrl::toPercentEncoding(imgBase64));
-
-//    QHttpPart part2;
-//    part2.setRawHeader("Content-Type","application/x-www-form-urlencoded");
-//    part2.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant(QString("form-data;name=\"%1\"").arg("id_card_side")));
-//    part2.setBody("front");
-
-//    mulPart->append(part1);
-////    mulPart->append(part2);
-
-//    //发送数据
-//    reply = manager->post(this->request, mulPart);
-//    mulPart->setParent(reply);
-
-    qDebug()<<"成功send()";
+    reply=manager->post(request,body);
+    qDebug()<<"成功send(),如果图片较大,需要稍微等一下,我应该加个什么UI提醒的功能";
 }
 
-QString OpticalSever::receiveResult(){
+void OpticalSever::receiveResult(){
 
     qDebug()<<"成功receive()";
     QByteArray data=reply->readAll();
-//    qDebug()<<data;
 
-    //Json数据解析
-//    QJsonDocument document = QJsonDocument::fromJson(data);
-//    if( !document.isNull() )
-//    {
-//        QString result="";
-//        QJsonObject jsonObject = document.object();
-//        QJsonObject jsonObject1 = jsonObject.value(QString("words_result")).toObject();
-//        QJsonObject::const_iterator it = jsonObject1.constBegin();
-//        QJsonObject::const_iterator end = jsonObject1.constEnd();
-//        while (it != end) {
-//            QString key = it.key();qDebug()<<key <<endl;
-//            QString value = it.value().toObject().value("words").toString();qDebug()<<value <<endl;
-//            QString pair = key + ": " + value + "\n";qDebug()<<pair <<endl;
-//            result += pair;
-//            it++;
-//        }
-//        return result;
-//    }
-//    return "null";
-/////////////////
-
-
-
-//    QString path;
-//    QJsonDocument document;
-//    QFile myfile(path);
-//    myfile.open(QIODevice::ReadOnly | QIODevice::Text);
     QJsonDocument jsonFile=QJsonDocument::fromJson(data);
     QJsonValue value;
     QString contents;
     QJsonValue res= jsonFile.object().value("words_result");
-    if(res.isObject())
-        qDebug()<<"is obj";
-    else if(res.isArray())
-        qDebug()<<"is array";
+
     for(int i=0;i<jsonFile.object().value("words_result_num").toInt();i++)
     {
         if(res[i].isObject())
         {
-            qDebug()<<"the array is obj";
-            qDebug()<<res[i].toObject().value("words").toString();
+//            qDebug()<<"the array is obj";
+//            qDebug()<<res[i].toObject().value("words").toString();
             contents+=res[i].toObject().value("words").toString()+"\n";
         }
     }
     this->result=contents;
-    return contents;
 
 }
 
 void update()
 {
+    //更新token
     QUrl dest("https://aip.baidubce.com/oauth/2.0/token");
 }
 
 
 QString Option::getURL()
-{//到时候用configure生成对应的URL
+{
+    //到时候用configure生成对应的URL
     QString url="https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic?access_token=";
     url=url+QString::fromStdString(accessToken);
     return url;

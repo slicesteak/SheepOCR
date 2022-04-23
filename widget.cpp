@@ -11,7 +11,10 @@ Widget::Widget(QWidget *parent) :
     this->initUi();
     this->initMember();
 
-    //connect(OpticalSever::manager,&QNetworkAccessManager::finished,this,&Widget::postBack);//通信完成后，自动执行getBack
+    //通信完成后，自动执行getBack
+    connect(myOCR.manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getres()));
+    //解除绑定
+    //disconnect(myOCR.manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getres()));
 }
 
 Widget::~Widget()
@@ -139,13 +142,23 @@ void Widget::on_btn_littleshow_clicked()
 
 void Widget::on_btn_menu_item_3_clicked()
 {
-//    ui->picPath->setText("C:\\Users\\lenov\\Desktop\\why.png");
 
-    connect(myOCR.manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getres()));
     QString path=ui->picPath->toPlainText();
 //    qDebug()<<path;
-    myOCR.scanPic(path);
-    myOCR.sendRequest();    
+    QFile myfile(path);
+    if(myfile.exists())
+    {
+        myOCR.scanPic(path);
+        myOCR.sendRequest();
+    }
+    else
+    {
+        myMbox->setIcon("question");                      //设置图标，可选值：check（确定）、question（疑问）、warn（警告）、error（报错）
+        myMbox->setBodyText("文件 "+path+" 不存在，请重新输入路径");            //设置正文内容
+        myMbox->setButtonText("确定");                     //设置单个按钮
+        myMbox->setButtonText("确定","取消");               //设置两个按钮
+        myMbox->exec();                                   //激活弹窗
+    }
 
 }
 
@@ -155,5 +168,6 @@ void Widget::getres(){
     myOCR.receiveResult();
     qDebug()<<"get the result"<<myOCR.result;
     ui->lab_mess_1->setText(myOCR.result);
+    //myOCR.result.clear();
 }
 
