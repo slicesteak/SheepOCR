@@ -29,6 +29,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
     opticalsever.cpp \
+    screenwidget.cpp \
         widget.cpp \
     appinit.cpp \
     mymessagebox.cpp
@@ -36,6 +37,7 @@ SOURCES += \
 HEADERS += \
     httpSDK-cpp/ocr.h \
     opticalsever.h \
+    screenwidget.h \
         widget.h \
     appinit.h \
     mymessagebox.h

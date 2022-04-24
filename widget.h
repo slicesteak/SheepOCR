@@ -11,6 +11,7 @@
 //自定义弹窗
 #include "mymessagebox.h"
 #include "opticalsever.h"
+#include "screenwidget.h"
 
 
 namespace Ui {
@@ -44,6 +45,8 @@ private slots:
     void on_btn_littleshow_clicked();
 
     void on_btn_menu_item_3_clicked();
+
+    void on_btn_menu_item_6_clicked();
 
 private:
     Ui::Widget *ui;
