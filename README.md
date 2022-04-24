@@ -3,6 +3,15 @@
 ## 介绍
 这是我们的OCR仓库，里面参考了主流OCR软件的设计，最终开发出令人竖起大拇指的OCR软件
 
+## 常用的Git命令（git三部曲）
+git pull origin  //把离线期间, 别人上传的代码合并到本地
+(开始coding)
+git  add  xxx
+git commit   xxx   //把自己修改的保存到本地
+
+git push origin  //把自己修改的上传到远程仓库
+
+
 ## 需求分析
 #### 功能性需求
 1.  输入一张通用格式的图片(.jpg .png .gif .tiff)，在桌面输出图片识别结果
@@ -18,11 +27,6 @@
 4.  若用户担心个人隐私，则使用本地OCR识别（如果可以顺带加上的话
 5.  兼容Windows10 和Windows 11，可移植性较好
 
-## 常用的Git命令
-每次写代码前建议先pull一遍，然后接着写。结束后先commit到本地，然后再push到远程仓库
-git clone https://gitee.com/vfish/neu-ocr.git  
-git push https://gitee.com/vfish/neu-ocr.git 或 git push origin
-git pull https://gitee.com/vfish/neu-ocr.git 或 git pull origin
 
 
 

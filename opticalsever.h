@@ -20,6 +20,7 @@
 #define IMG_OVER_SIZE 0
 #define IMG_NOT_EXIST 1
 #define INVALID_MODE 2
+#define TIME_OUT 3
 
 #define MODE_ACCURATE_BASIC 0  //通用文字识别（高精度版）
 #define MODE_ACCURATE 1  //通用文字识别（高精度含位置版）
@@ -57,29 +58,31 @@ class OpticalSever: public QObject
     Q_OBJECT
     
 public:
-    QString result;
-    Option configOption;
 
+    Option configOption;
+    QNetworkAccessManager *manager;//用于管理请求数据的发送
     
     OpticalSever(QObject * parent);
     ~OpticalSever();
 
     void setConfig();  //设置识别选项
     void start(); //开始识别，需要先设置图片路径path，然后才能识别
-    
+    QString getResult();
+    void TokenUpdate();  //更新token
+
 signals:
     void sig_changebacktoselectmode();
 
 private:    
-    QNetworkAccessManager *manager;//用于管理请求数据的发送
+    QString result;  //存储返回的result
     QNetworkReply *reply;       //用于接受返回数据
     QNetworkRequest request;    //设置发送的请求设定    
     QByteArray imgBase64;       //图片编码并进行urlencode
     MyMessageBox *OCR_notice_box;//各种情况的提醒
-    
+
     void scanPic(); //识别图片，将图片转base64
     void sendRequest();  //发送请求    
-    void TokenUpdate();  //更新token
+
     void infoNotice(int error_msg);  //显示错误信息
     
 private slots:

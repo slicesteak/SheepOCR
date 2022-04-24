@@ -10,7 +10,8 @@ CURL/
 OpenSSL/
 OCR-test/*
 *.autosave
-
+*.orig
+*.json
 ./response.json
 
 PeachDemo.pro.user.*

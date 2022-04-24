@@ -19,7 +19,7 @@ OpticalSever::OpticalSever(QObject * parent):QObject(parent)
 {
     manager=new QNetworkAccessManager();
     this->OCR_notice_box = new MyMessageBox();
-    
+
     //通信完成后，自动执行receive 结果
     connect(this->manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveResult()));
     //解除绑定
@@ -30,6 +30,8 @@ OpticalSever::~OpticalSever(){}
 
 void OpticalSever::start()
 {
+    configOption.path.replace("file:///","");
+
     QFile myfile(this->configOption.path);
     if(myfile.exists())
     {
@@ -77,30 +79,65 @@ void OpticalSever::sendRequest()
     body.append("image=");
     body.append(imgBase64);
     reply=manager->post(request,body);
-    qDebug()<<"成功send(),如果图片较大,需要稍微等一下,我应该加个什么UI提醒的功能";
+    qDebug()<<"成功send()";
 }
 
 void OpticalSever::receiveResult(){
 
     qDebug()<<"成功receive()";
     QByteArray data=reply->readAll();
-//    qDebug()<<data;
+    qDebug()<<data;
 
+    QString resultArray;
+    QString resultNum;
+    QString resultName;
+
+    switch (this->configOption.mode)
+    {
+    case MODE_ACCURATE_BASIC:
+    case MODE_ACCURATE:
+    case MODE_GENERAL_BASIC:
+    case MODE_GENERAL:
+    case MODE_WEBIMAGE:
+    case MODE_WEBIMAGE_LOC:
+    case MODE_HANDWRITING:
+    case MODE_NUMBERS:
+        resultArray="words_result";
+        resultNum="words_result_num";
+        resultName="words";
+        break;
+    case MODE_DOC_ANALYSIS_OFFICE:
+        resultArray="results";
+        resultNum="results_num";
+        resultName="word";
+        break;
+
+    case MODE_QRCODE:
+        resultArray="codes_result";
+        resultNum="codes_result_num";
+        resultName="text";
+
+    //下面这两种暂不支持
+    case MODE_TABLE:break;
+    case MODE_SEAL:break;
+    }
+
+    qDebug()<<resultArray<<" "<<resultNum<<" "<<resultName<<endl;
     QJsonDocument jsonFile=QJsonDocument::fromJson(data);
     QJsonValue value;
     QString contents;
-    QJsonValue res= jsonFile.object().value("words_result");
+    QJsonValue res= jsonFile.object().value(resultArray);
 
-
-    for(int i=0;i<jsonFile.object().value("words_result_num").toInt();i++)
+    for(int i=0;i<jsonFile.object().value(resultNum).toInt();i++)
     {
-        if(res[i].isObject())
+        if(res[i].toObject().value(resultName).isArray())
         {
-//            qDebug()<<"the array is obj";
-//            qDebug()<<res[i].toObject().value("words").toString();
-            contents+=res[i].toObject().value("words").toString()+"\n";
+            contents+=res[i].toObject().value(resultName)[0].toString()+"\n";
+//            qDebug()<<contents;
         }
-    }
+        else
+            contents+=res[i].toObject().value(resultName).toString()+"\n";
+    }    
     this->result=contents;
 
 }
@@ -109,6 +146,39 @@ void OpticalSever::TokenUpdate()
 {
     //更新token
     QUrl dest("https://aip.baidubce.com/oauth/2.0/token");
+
+    //用来测试json读取
+//    QString resultArray;
+//    QString resultNum;
+//    QString resultName;
+
+//    resultArray="codes_result";
+//    resultNum="codes_result_num";
+//    resultName="text";
+//    QFile myfile("D:\\Code\\temp\\neu-ocr\\response.json");
+//    myfile.open(QIODevice::ReadOnly);
+//    QByteArray data=myfile.readAll();
+//    myfile.close();
+
+//    QJsonDocument jsonFile=QJsonDocument::fromJson(data);
+//    QJsonValue value;
+//    QString contents;
+//    QJsonValue res= jsonFile.object().value(resultArray);
+
+//    if(res.isArray())
+//        qDebug()<<"is array"<<endl;
+//    else if(res.isObject())
+//        qDebug()<<"is obj"<<endl;
+//    qDebug()<<res.toString();
+//    for(int i=0;i<jsonFile.object().value(resultNum).toInt();i++)
+//    {
+//        if(res[i].isObject())
+//        {
+//            contents+=res[i].toObject().value(resultName)[0].toString()+"\n";
+
+//        }
+//    }
+//    qDebug()<<contents;
 }
 
 
@@ -144,19 +214,34 @@ void OpticalSever::infoNotice(int error_msg){
 
     switch (error_msg) {
         case IMG_OVER_SIZE:
-            OCR_notice_box->setBodyText("文件体积过大，请重新选择图片"); //设置正文内容、
-            emit sig_changebacktoselectmode();
+            OCR_notice_box->setBodyText("文件体积过大，请重新选择图片"); //设置正文内容
             break;
         case IMG_NOT_EXIST:
             OCR_notice_box->setBodyText("图片"+this->configOption.path+"不存在，请重新选择图片");
-            emit sig_changebacktoselectmode();
             break;
         case INVALID_MODE:
-            OCR_notice_box->setBodyText("识别模式设置错误");
-            emit sig_changebacktoselectmode();
+            OCR_notice_box->setBodyText("识别模式设置错误");            
+            break;
+        case TIME_OUT:
+            OCR_notice_box->setBodyText("连接超时");
             break;
     }
 
+    emit sig_changebacktoselectmode();
     OCR_notice_box->exec();         //激活弹窗
 }
 
+QString OpticalSever::getResult(){
+    //wait.
+    QTimer timer;
+    timer.setInterval(5000);
+    timer.setSingleShot(true);
+//    connect(&timer,timer.timeout(QTimer::timeout()),this,infoNotice(0));
+
+   QEventLoop eventLoop;
+   connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
+   eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
+
+
+    return result;
+}

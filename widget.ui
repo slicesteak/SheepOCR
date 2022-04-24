@@ -950,7 +950,7 @@
                 <enum>Qt::LeftToRight</enum>
                </property>
                <property name="text">
-                <string>识别结果</string>
+                <string>识别中...</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>

@@ -164,6 +164,8 @@ void Widget::on_btn_littleshow_clicked()
 void Widget::on_btn_menu_item_3_clicked()
 {
     ui->sw_main->setCurrentIndex(0);
+    ui->lab_mess_1->setText("识别中...");
+
     myOCR.configOption.path=ui->picPath->toPlainText();
 
     if(ui->radioButton->isChecked()){
@@ -197,7 +199,10 @@ void Widget::on_btn_menu_item_3_clicked()
     }
 
     myOCR.start();
-    ui->lab_mess_1->setText(myOCR.result);
+//    qDebug()<<"hello res:"<<myOCR.getResult()<<endl;
+    ui->lab_mess_1->setText(myOCR.getResult());
+
+
 }
 
 
