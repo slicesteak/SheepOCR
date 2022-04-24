@@ -144,13 +144,16 @@ void OpticalSever::infoNotice(int error_msg){
 
     switch (error_msg) {
         case IMG_OVER_SIZE:
-            OCR_notice_box->setBodyText("文件体积过大，请重新选择图片"); //设置正文内容
+            OCR_notice_box->setBodyText("文件体积过大，请重新选择图片"); //设置正文内容、
+            emit sig_changebacktoselectmode();
             break;
         case IMG_NOT_EXIST:
             OCR_notice_box->setBodyText("图片"+this->configOption.path+"不存在，请重新选择图片");
+            emit sig_changebacktoselectmode();
             break;
         case INVALID_MODE:
             OCR_notice_box->setBodyText("识别模式设置错误");
+            emit sig_changebacktoselectmode();
             break;
     }
 

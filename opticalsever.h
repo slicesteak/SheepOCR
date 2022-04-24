@@ -63,10 +63,13 @@ public:
     
     OpticalSever(QObject * parent);
     ~OpticalSever();
-    
+
     void setConfig();  //设置识别选项
     void start(); //开始识别，需要先设置图片路径path，然后才能识别
     
+signals:
+    void sig_changebacktoselectmode();
+
 private:    
     QNetworkAccessManager *manager;//用于管理请求数据的发送
     QNetworkReply *reply;       //用于接受返回数据

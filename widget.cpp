@@ -11,6 +11,9 @@ Widget::Widget(QWidget *parent) :
     this->initUi();
     this->initMember();
 
+
+    //手写一个信号和槽实现mode切换
+    connect(&myOCR,SIGNAL(sig_changebacktoselectmode()),this,SLOT(slot_changebacktoselectmode()));
 }
 
 Widget::~Widget()
@@ -101,6 +104,12 @@ void Widget::littleShow()
     trayIcon->showMessage(title,text,QSystemTrayIcon::Information,3000); //此参数为提示时长
 }
 
+//手写槽函数，识别错误后重新切换到mode
+void Widget::slot_changebacktoselectmode()
+{
+    ui->sw_main->setCurrentIndex(1);
+}
+
 /**********************************************************控件槽函数****************************************************************/
 
 void Widget::closeEvent(QCloseEvent *event)
@@ -154,8 +163,39 @@ void Widget::on_btn_littleshow_clicked()
 
 void Widget::on_btn_menu_item_3_clicked()
 {
+    ui->sw_main->setCurrentIndex(0);
     myOCR.configOption.path=ui->picPath->toPlainText();
-    //myOCR.configOption.mode=MODE_ACCURATE_BASIC;  //默认情况下是通用文字识别
+
+    if(ui->radioButton->isChecked()){
+        myOCR.configOption.mode=MODE_ACCURATE_BASIC ;    //通用文字识别（高精度版）
+    }else if(ui->radioButton_3->isChecked()){
+        myOCR.configOption.mode=MODE_ACCURATE ;  //通用文字识别（高精度含位置版）
+    }else if(ui->radioButton_2->isChecked()){
+        myOCR.configOption.mode=MODE_GENERAL_BASIC ; //通用文字识别（标准版）
+    }else if(ui->radioButton_4->isChecked()){
+        myOCR.configOption.mode=MODE_GENERAL ;  //通用文字识别（标准含位置版）
+    }else if(ui->radioButton_12->isChecked()){
+        myOCR.configOption.mode=MODE_DOC_ANALYSIS_OFFICE; //办公文档识别
+    }else if(ui->radioButton_11->isChecked()){
+        myOCR.configOption.mode=MODE_WEBIMAGE; //网络图片文字识别
+    }else if(ui->radioButton_9->isChecked()){
+        myOCR.configOption.mode=MODE_WEBIMAGE_LOC ;  //网络图片文字识别（含位置版）
+    }else if(ui->radioButton_10->isChecked()){
+        myOCR.configOption.mode=MODE_HANDWRITING; //手写文字识别
+    }else if(ui->radioButton_8->isChecked()){
+        myOCR.configOption.mode=MODE_TABLE ;   //表格文字识别V2
+    }else if(ui->radioButton_7->isChecked()){
+        myOCR.configOption.mode=MODE_TABLE ;  //表格文字识别V2
+    }else if(ui->radioButton_6->isChecked()){
+        myOCR.configOption.mode=MODE_TABLE; //表格文字识别V2
+    }else if(ui->radioButton_5->isChecked()){
+        myOCR.configOption.mode=MODE_SEAL ;  //印章识别
+    }else if(ui->radioButton_13->isChecked()){
+        myOCR.configOption.mode=MODE_NUMBERS ;  //数字识别
+    }else if(ui->radioButton_14->isChecked()){
+        myOCR.configOption.mode=MODE_QRCODE ;  //二维码识别
+    }
+
     myOCR.start();
     ui->lab_mess_1->setText(myOCR.result);
 }

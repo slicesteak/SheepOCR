@@ -10,6 +10,8 @@
 #include"opticalsever.h"
 //自定义弹窗
 #include "mymessagebox.h"
+#include "opticalsever.h"
+
 
 namespace Ui {
 class Widget;
@@ -22,6 +24,7 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
+
 
 private slots:
     void closeEvent(QCloseEvent *event);
@@ -62,8 +65,9 @@ private:
 
     OpticalSever myOCR;
 
+
 private slots:
-    
+    void slot_changebacktoselectmode();
 };
 
 #endif // WIDGET_H
