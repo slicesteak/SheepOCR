@@ -27,27 +27,87 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+    capture/capturemodification.cpp \
+    capture/screenshot.cpp \
+    capture/tools/applauncher.cpp \
+    capture/tools/capturetool.cpp \
+    capture/tools/copytool.cpp \
+    capture/tools/exittool.cpp \
+    capture/tools/markertool.cpp \
+    capture/tools/movetool.cpp \
+    capture/tools/savetool.cpp \
+    capture/tools/sizeindicatortool.cpp \
+    capture/tools/toolfactory.cpp \
+    capture/widget/amplifierwidget.cpp \
+    capture/widget/buttonhandler.cpp \
+    capture/widget/capturebutton.cpp \
+    capture/widget/capturewidget.cpp \
+    capture/workers/imgur/imagelabel.cpp \
+    capture/workers/imgur/loadspinner.cpp \
+    capture/workers/imgur/notificationwidget.cpp \
         main.cpp \
     opticalsever.cpp \
     screenwidget.cpp \
+    utils/confighandler.cpp \
+    utils/desktopfileparse.cpp \
+    utils/desktopinfo.cpp \
+    utils/screengrabber.cpp \
         widget.cpp \
     appinit.cpp \
     mymessagebox.cpp
 
 HEADERS += \
+    capture/capturemodification.h \
+    capture/screenshot.h \
+    capture/tools/applauncher.h \
+    capture/tools/capturetool.h \
+    capture/tools/copytool.h \
+    capture/tools/exittool.h \
+    capture/tools/markertool.h \
+    capture/tools/movetool.h \
+    capture/tools/savetool.h \
+    capture/tools/sizeindicatortool.h \
+    capture/tools/toolfactory.h \
+    capture/widget/amplifierwidget.h \
+    capture/widget/buttonhandler.h \
+    capture/widget/capturebutton.h \
+    capture/widget/capturewidget.h \
+    capture/workers/imgur/imagelabel.h \
+    capture/workers/imgur/loadspinner.h \
+    capture/workers/imgur/notificationwidget.h \
     httpSDK-cpp/ocr.h \
     opticalsever.h \
     screenwidget.h \
+    utils/confighandler.h \
+    utils/desktopfileparse.h \
+    utils/desktopinfo.h \
+    utils/screengrabber.h \
         widget.h \
     appinit.h \
     mymessagebox.h
 
 FORMS += \
+    capture/widget/amplifierwidget.ui \
         widget.ui \
     mymessagebox.ui
 
 RESOURCES += \
-    qss.qrc
+    qss.qrc \
+    Img/Arrow.png \
+    Img/Brush.PNG \
+    Img/Circle.png \
+    Img/Exit.png \
+    Img/Finish.png \
+    Img/Magnifier.png \
+    Img/Mosaic.png \
+    Img/Rectangle.png \
+    Img/Save.png \
+    Img/Text.png \
+    Img/Undo.png \
+    Img/cursor-move.png \
+    Img/line_weight_3.png \
+    Img/line_weight_4.png \
+    Img/line_weight_5.png
 
 
 ## 添加的外部库json
@@ -63,6 +123,7 @@ RESOURCES += \
 
 #INCLUDEPATH += $$PWD/../../../temp_download/curl-7.82.0/mybuild/lib/Release
 #DEPENDPATH += $$PWD/../../../temp_download/curl-7.82.0/mybuild/lib/Release
+
 
 
 

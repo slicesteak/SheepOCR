@@ -1,5 +1,6 @@
 #include "widget.h"
 #include "ui_widget.h"
+#include "capture/widget/capturewidget.h"
 #include <QGraphicsDropShadowEffect>
 #include<QtDebug>
 Widget::Widget(QWidget *parent) :
@@ -209,7 +210,7 @@ void Widget::on_btn_menu_item_6_clicked()
 {
 
     //a.setFont(QFont("Microsoft Yahei", 9));
-
+/*
 #if (QT_VERSION <= QT_VERSION_CHECK(5,0,0))
 #if _MSC_VER
     QTextCodec *codec = QTextCodec::codecForName("gbk");
@@ -224,9 +225,12 @@ void Widget::on_btn_menu_item_6_clicked()
     QTextCodec::setCodecForLocale(codec);
 #endif
 
-    ScreenWidget::Instance()->showFullScreen();   //直接调用实例
+    ScreenWidget::Instance()->showFullScreen();   //直接调用实例*/
     ui->picPath->setText(QString("%1/screen_%2.png").arg(qApp->applicationDirPath()).arg("temp"));
 
+    CaptureWidget* captureWidget = new CaptureWidget(this);
+    //connect(captureWidget, SIGNAL(capturePixmap(const QPixmap&)), this, SLOT(onCapturePixmap(const QPixmap&)));
+    captureWidget->show();
 }
 
 
