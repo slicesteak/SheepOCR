@@ -199,10 +199,19 @@ void Widget::on_btn_menu_item_3_clicked()
     }
 
     myOCR.start();
-//    qDebug()<<"hello res:"<<myOCR.getResult()<<endl;
-    ui->lab_mess_1->setText(myOCR.getResult());
+    //qDebug()<<"hello res:"<<myOCR.getResult()<<endl;
+    QString result=myOCR.getResult();
+    ui->lab_mess_1->setText(result);
+    if(!result.isEmpty()){
+        ui->lab_mess_1->setScaledContents(true);
+        ui->lab_mess_1->adjustSize();
+        ui->lab_mess_1->setGeometry(QRect(328, 240, 329, 27*4));  //四倍行距
+        ui->lab_mess_1->setWordWrap(true);
+        ui->lab_mess_1->setAlignment(Qt::AlignCenter);
 
-
+        ui->lab_mess_1->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    }
+    ui->picPath->clear();
 }
 
 void Widget::on_btn_menu_item_6_clicked()

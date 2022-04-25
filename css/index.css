@@ -6,7 +6,7 @@ QScrollBar::handle:vertical { background:#C0C4CC; border-radius: 3px; }
 QScrollBar::handle:vertical:hover { background:#909399; }
 QScrollBar::handle:vertical:pressed { background:#909399; }
 QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical, QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { background:none; }
-QCheckBox, QRadioButton { font-size: 13px; }
+QCheckBox, QRadioButton { font-size: 20px; }
 QComboBox, QLineEdit, QTextEdit, QTextBrowser, QTimeEdit, QDateEdit, QDateTimeEdit, QSpinBox,
 QDoubleSpinBox { background-color: #ffffff; border: 1px solid #DCDFE6; border-radius: 6px; padding: 5px 10px; font-size: 13px; }
 QTextEdit, QTextBrowser { padding-right: 3px; }
@@ -26,7 +26,7 @@ QTabWidget::pane:bottom { bottom:-1px; }
 QTabWidget::pane:left { right:-1px; }
 QTabWidget::pane:right { left:-1px; }
 QTabBar::tab:selected { background-color: #ffffff; border-bottom: none; }
-QGroupBox { border: 1px solid #DCDFE6; border-radius: 6px; font-size: 13px; margin-top: 7px; }
+QGroupBox { border: 1px solid #DCDFE6; border-radius: 6px; font-size: 20px; margin-top: 7px; }
 QGroupBox::title { subcontrol-origin: margin; subcontrol-position: top center; padding: 0px 5px 3px; }
 #w_bg { background-color: #f2f1f5; border-radius: 22px; }
 #w_menu { background-color: #f8f8f8; border-radius: 16px; }

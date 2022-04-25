@@ -61,7 +61,7 @@ public:
 
     Option configOption;
     QNetworkAccessManager *manager;//用于管理请求数据的发送
-    
+    bool canReceive;
     OpticalSever(QObject * parent);
     ~OpticalSever();
 
