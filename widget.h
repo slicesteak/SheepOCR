@@ -13,7 +13,7 @@
 #include "opticalsever.h"
 #include "screenwidget.h"
 #include "configwidget.h"
-#include "modifywidget1.h"
+#include "modifywidget.h"
 
 
 namespace Ui {
