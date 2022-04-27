@@ -35,6 +35,7 @@ SOURCES += \
     opticalsever.cpp \
     register.cpp \
     screenwidget.cpp \
+    suspendball.cpp \
         widget.cpp \
     appinit.cpp \
     mymessagebox.cpp
@@ -47,6 +48,7 @@ HEADERS += \
     opticalsever.h \
     register.h \
     screenwidget.h \
+    suspendball.h \
         widget.h \
     appinit.h \
     mymessagebox.h
@@ -55,6 +57,7 @@ FORMS += \
     configwidget.ui \
     login.ui \
     modifywidget.ui \
+    suspendball.ui \
         widget.ui \
     mymessagebox.ui
 

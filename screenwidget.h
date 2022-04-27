@@ -63,6 +63,10 @@ protected:
     void paintEvent(QPaintEvent *);
     void showEvent(QShowEvent *);
 
+
+
+signals:
+    void myclose();
 private slots:
     void usethis();
     void saveScreen();

@@ -7,7 +7,7 @@
 #include <QEvent>
 #include <QDateTime>
 #include <QStringList>
-
+#include<QDebug>
 #if (QT_VERSION > QT_VERSION_CHECK(5,0,0))
 #include <QScreen>
 #endif
@@ -236,7 +236,10 @@ void ScreenWidget::usethis()
 
     QString fileName = QString("%1/screen_%2.png").arg(qApp->applicationDirPath()).arg("temp");
     fullScreen->copy(x, y, w, h).save(fileName, "png");
+    qDebug()<<"hi";
+    emit this->myclose();
     close();
+
 
 }
 
@@ -268,13 +271,17 @@ void ScreenWidget::saveScreenOther()
         fileName += ".png";
     }
 
+    qDebug()<<fileName<<endl;
     if (fileName.length() > 0) {
         int x = screen->getLeftUp().x();
         int y = screen->getLeftUp().y();
         int w = screen->getRightDown().x() - x;
         int h = screen->getRightDown().y() - y;
         fullScreen->copy(x, y, w, h).save(fileName, "png");
+        qDebug()<<"hello"<<endl;
+        emit this->myclose();
         close();
+
     }
 }
 
@@ -331,6 +338,7 @@ void ScreenWidget::mouseReleaseEvent(QMouseEvent *)
     } else if (screen->getStatus() == Screen::MOV) {
         this->setCursor(Qt::ArrowCursor);
     }
+    menu->exec(cursor().pos());
 }
 
 void ScreenWidget::contextMenuEvent(QContextMenuEvent *)

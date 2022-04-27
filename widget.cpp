@@ -1,5 +1,7 @@
 #include "widget.h"
 #include "ui_widget.h"
+#include "widget.h"
+#include "ui_widget.h"
 #include <QGraphicsDropShadowEffect>
 #include<QtDebug>
 #include "login.h"
@@ -18,7 +20,8 @@ Widget::Widget(QWidget *parent,QString UName) :
 
     //手写一个信号和槽实现mode切换
     connect(&myOCR,SIGNAL(sig_changebacktoselectmode()),this,SLOT(slot_changebacktoselectmode()));
-
+    //调用截图后，显示主面板
+    connect(myscreenwidget,SIGNAL(myclose()),this, SLOT(myshow()));
 }
 
 Widget::~Widget()
@@ -95,6 +98,17 @@ void Widget::initMember()
     trayIconMenu->addAction(returnNormal);
     trayIconMenu->addAction(quitAction);
     trayIcon->setContextMenu(trayIconMenu);
+
+    this->myscreenwidget = ScreenWidget::Instance();
+    //创建浮动小球
+    ball=new suspendball;
+    //主面板显示，悬浮球隐藏
+    connect(ball,SIGNAL(showwidget()),this, SLOT(showNormal()));
+
+
+    // 让小球显示出来
+    ball->hide();
+
 }
 
 /**********************************************************自定义函数****************************************************************/
@@ -103,6 +117,7 @@ void Widget::littleShow()
 {
     this->hide();//隐藏主窗口
     trayIcon->show();//显示托盘
+    ball->show();
 
     //显示到系统提示框的信息
     QString title="Peach";
@@ -238,8 +253,8 @@ void Widget::on_btn_menu_item_6_clicked()
     QTextCodec *codec = QTextCodec::codecForName("utf-8");
     QTextCodec::setCodecForLocale(codec);
 #endif
-
-    ScreenWidget::Instance()->showFullScreen();   //直接调用实例
+    myscreenwidget->showFullScreen();
+       //直接调用实例
     ui->picPath->setText(QString("%1/screen_%2.png").arg(qApp->applicationDirPath()).arg("temp"));
 
 }
@@ -268,3 +283,11 @@ void Widget::on_btn_mine_clicked()
     cw->exec();
     this->show();
 }
+
+
+void Widget::myshow()
+{
+    this->show();
+    ui->picPath->setText(QString("%1/screen_%2.png").arg(qApp->applicationDirPath()).arg("temp"));
+}
+

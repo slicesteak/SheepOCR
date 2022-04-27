@@ -14,7 +14,7 @@
 #include "screenwidget.h"
 #include "configwidget.h"
 #include "modifywidget.h"
-
+#include<suspendball.h>
 
 namespace Ui {
 class Widget;
@@ -28,7 +28,8 @@ public:
     explicit Widget(QWidget *parent = 0,QString UName=0);
     QString  UName;//用户名
     ~Widget();
-
+     suspendball *ball;// 浮动小球
+    ScreenWidget *myscreenwidget; //截图模块
 
 private slots:
     void closeEvent(QCloseEvent *event);
@@ -76,12 +77,12 @@ private:
 
     ConfigWidget* cw;
 
-
 private slots:
     void slot_changebacktoselectmode();
 
     void on_btn_mine_clicked();
-    void on_btn_menu_item_3_triggered(QAction *arg1);
+
+    void myshow();
 };
 
 #endif // WIDGET_H
