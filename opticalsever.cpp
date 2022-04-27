@@ -19,7 +19,7 @@ OpticalSever::OpticalSever(QObject * parent):QObject(parent)
 {
     manager=new QNetworkAccessManager();
     this->OCR_notice_box = new MyMessageBox();
-
+    canReceive=false;
     //通信完成后，自动执行receive 结果
     connect(this->manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveResult()));
     //解除绑定
@@ -79,6 +79,7 @@ void OpticalSever::sendRequest()
     body.append("image=");
     body.append(imgBase64);
     reply=manager->post(request,body);
+    canReceive=true;
     qDebug()<<"成功send()";
 }
 
@@ -132,11 +133,11 @@ void OpticalSever::receiveResult(){
     {
         if(res[i].toObject().value(resultName).isArray())
         {
-            contents+=res[i].toObject().value(resultName)[0].toString()+"\n";
+            contents+=res[i].toObject().value(resultName)[0].toString()+" ";
 //            qDebug()<<contents;
         }
         else
-            contents+=res[i].toObject().value(resultName).toString()+"\n";
+            contents+=res[i].toObject().value(resultName).toString()+" ";
     }    
     this->result=contents;
 
@@ -233,15 +234,17 @@ void OpticalSever::infoNotice(int error_msg){
 
 QString OpticalSever::getResult(){
     //wait.
-    QTimer timer;
-    timer.setInterval(5000);
-    timer.setSingleShot(true);
-//    connect(&timer,timer.timeout(QTimer::timeout()),this,infoNotice(0));
+    if(canReceive)
+    {
+        QTimer timer;
+        timer.setInterval(5000);
+        timer.setSingleShot(true);
+    //    connect(&timer,timer.timeout(QTimer::timeout()),this,infoNotice(0));
 
-   QEventLoop eventLoop;
-   connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
-   eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
-
-
+       QEventLoop eventLoop;
+       connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
+       eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
+       canReceive=false;
+    }
     return result;
 }

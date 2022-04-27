@@ -932,7 +932,7 @@
             </font>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page">
             <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -991,7 +991,7 @@
                  <string>通用文字识别（高精度版）</string>
                 </property>
                 <property name="checked">
-                 <bool>true</bool>
+                 <bool>false</bool>
                 </property>
                </widget>
                <widget class="QRadioButton" name="radioButton_2">
@@ -1011,6 +1011,9 @@
                 </property>
                 <property name="text">
                  <string>通用文字识别（标准版）</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
                 </property>
                </widget>
                <widget class="QRadioButton" name="radioButton_3">
