@@ -6,6 +6,7 @@
 
 QT       += core gui
 QT+= network
+QT +=sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,22 +28,33 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+    configwidget.cpp \
+    login.cpp \
         main.cpp \
+    modifywidget.cpp \
     opticalsever.cpp \
+    register.cpp \
     screenwidget.cpp \
         widget.cpp \
     appinit.cpp \
     mymessagebox.cpp
 
 HEADERS += \
+    configwidget.h \
     httpSDK-cpp/ocr.h \
+    login.h \
+    modifywidget.h \
     opticalsever.h \
+    register.h \
     screenwidget.h \
         widget.h \
     appinit.h \
     mymessagebox.h
 
 FORMS += \
+    configwidget.ui \
+    login.ui \
+    modifywidget.ui \
         widget.ui \
     mymessagebox.ui
 

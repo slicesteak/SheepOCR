@@ -12,6 +12,8 @@
 #include "mymessagebox.h"
 #include "opticalsever.h"
 #include "screenwidget.h"
+#include "configwidget.h"
+#include "modifywidget1.h"
 
 
 namespace Ui {
@@ -23,7 +25,8 @@ class Widget : public QWidget
     Q_OBJECT
 
 public:
-    explicit Widget(QWidget *parent = 0);
+    explicit Widget(QWidget *parent = 0,QString UName=0);
+    QString  UName;//用户名
     ~Widget();
 
 
@@ -48,6 +51,8 @@ private slots:
 
     void on_btn_menu_item_6_clicked();
 
+    //void receiveData(QString data);   //接收传递过来的数据的槽
+
 private:
     Ui::Widget *ui;
 
@@ -66,11 +71,17 @@ private:
     void initMember();      //成员变量初始化函数
     void littleShow();      //最小化显示函数
 
+
     OpticalSever myOCR;
+
+    ConfigWidget* cw;
 
 
 private slots:
     void slot_changebacktoselectmode();
+
+    void on_btn_mine_clicked();
+    void on_btn_menu_item_3_triggered(QAction *arg1);
 };
 
 #endif // WIDGET_H
