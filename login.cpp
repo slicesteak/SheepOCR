@@ -1,9 +1,10 @@
 #include "login.h"
 #include "ui_login.h"
 #include "register.h"
-#include <Qtsql>
+#include <QtSql>
 #include <QMessageBox>
 #include "widget.h"
+
 
 Login::Login(QWidget *parent) :
     QWidget(parent),

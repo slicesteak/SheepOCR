@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
         db.setDatabaseName("user");
         db.setUserName("root");
         db.setPort(3306);
-        db.setPassword("1314521");
+        db.setPassword("123456");
         //如果数据库连接成功打开窗口否则退出程序
         if(db.open())
         {

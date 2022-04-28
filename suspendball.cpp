@@ -37,6 +37,7 @@ suspendball::suspendball(QWidget *parent) :
     //                                       "solid black; background: red";
     ////    样式添加到lable中
     //    ui->label->setStyleSheet(m_ball_SheetStyle);
+
     QPixmap *pixw;
      pixw = new QPixmap(ui->label->size());
       pixw->load(":/icons/logo.png");

@@ -83,6 +83,7 @@ private slots:
     void on_btn_mine_clicked();
 
     void myshow();
+    void on_btn_menu_item_2_clicked();
 };
 
 #endif // WIDGET_H

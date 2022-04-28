@@ -528,7 +528,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>翻译</string>
+                 <string>截图</string>
                 </property>
                 <property name="icon">
                  <iconset resource="qss.qrc">
@@ -590,7 +590,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>保存</string>
+                 <string>悬浮球</string>
                 </property>
                 <property name="icon">
                  <iconset resource="qss.qrc">
@@ -621,7 +621,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>悬浮</string>
+                 <string>赞赏</string>
                 </property>
                 <property name="toolButtonStyle">
                  <enum>Qt::ToolButtonTextUnderIcon</enum>

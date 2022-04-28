@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QLabel>
 #include "widget.h"
-#define CONNECT_DB 1//数据库开关，1连接数据库，其他不连数据库
+#define CONNECT_DB 0//数据库开关，1连接数据库，其他不连数据库
 
 namespace Ui {
 class Login;
