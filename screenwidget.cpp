@@ -175,7 +175,7 @@ ScreenWidget::ScreenWidget(QWidget *parent) : QWidget(parent)
     menu->addAction("保存全屏截图", this, SLOT(saveFullScreen()));
     menu->addAction("截图另存为", this, SLOT(saveScreenOther()));
     menu->addAction("全屏另存为", this, SLOT(saveFullOther()));
-    menu->addAction("退出截图", this, SLOT(hide()));
+    menu->addAction("退出截图", this, SLOT(ScreenShotHide()));
 
     //取得屏幕大小
     screen = new Screen(QApplication::desktop()->size());
@@ -306,6 +306,11 @@ void ScreenWidget::saveFullOther()
         emit this->myclose();
         close();
     }
+}
+
+void ScreenWidget::ScreenShotHide(){
+    this->hide();
+    emit this->myclose();
 }
 
 void ScreenWidget::mouseMoveEvent(QMouseEvent *e)

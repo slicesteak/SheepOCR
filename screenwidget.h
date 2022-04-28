@@ -74,5 +74,6 @@ private slots:
     void saveFullScreen();
     void saveScreenOther();
     void saveFullOther();
+    void ScreenShotHide();
 };
 #endif // SCREENWIDGET_H
