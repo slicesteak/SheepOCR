@@ -150,6 +150,8 @@ QScopedPointer<ScreenWidget> ScreenWidget::self;
 ScreenWidget *ScreenWidget::Instance()
 {
     if (self.isNull()) {
+        //QMutex类提供的是线程之间的访问顺序化
+        //QMutex的目的是保护一个对象、数据结构或者代码段，所以同一时间只有一个线程可以访问它
         static QMutex mutex;
         QMutexLocker locker(&mutex);
         if (self.isNull()) {
@@ -157,6 +159,9 @@ ScreenWidget *ScreenWidget::Instance()
         }
     }
 
+    //take()接口的意思是从这个容器中将对象删除，并返回之前放在这个容器中的对象或者数据，QScopedPointer不再拥有这个对象的指针
+    //return self.take();
+    //data()接口的意思就是返回容器中的指针，QScopedPointer还是拥有这个对象的指针的
     return self.data();
 }
 
@@ -236,8 +241,8 @@ void ScreenWidget::usethis()
 
     QString fileName = QString("%1/screen_%2.png").arg(qApp->applicationDirPath()).arg("temp");
     fullScreen->copy(x, y, w, h).save(fileName, "png");
-    qDebug()<<"hi";
     emit this->myclose();
+    emit this->usethisPath();
     close();
 
 
@@ -253,6 +258,8 @@ void ScreenWidget::saveScreen()
 
     QString fileName = QString("%1/screen_%2.png").arg(qApp->applicationDirPath()).arg(STRDATETIME);
     fullScreen->copy(x, y, w, h).save(fileName, "png");
+
+    emit this->myclose();
     close();
 }
 
@@ -260,6 +267,7 @@ void ScreenWidget::saveFullScreen()
 {
     QString fileName = QString("%1/full_%2.png").arg(qApp->applicationDirPath()).arg(STRDATETIME);
     fullScreen->save(fileName, "png");
+    emit this->myclose();
     close();
 }
 
@@ -295,6 +303,7 @@ void ScreenWidget::saveFullOther()
 
     if (fileName.length() > 0) {
         fullScreen->save(fileName, "png");
+        emit this->myclose();
         close();
     }
 }
@@ -346,3 +355,4 @@ void ScreenWidget::contextMenuEvent(QContextMenuEvent *)
     this->setCursor(Qt::ArrowCursor);
     menu->exec(cursor().pos());
 }
+

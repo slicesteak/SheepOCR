@@ -66,7 +66,8 @@ protected:
 
 
 signals:
-    void myclose();
+    void myclose();//截图关闭信号
+    void usethisPath();//当使用当前截图时，发送自动设置路径信号
 private slots:
     void usethis();
     void saveScreen();

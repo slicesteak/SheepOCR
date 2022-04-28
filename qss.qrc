@@ -24,5 +24,6 @@
         <file>icons/close.png</file>
         <file>icons/down.png</file>
         <file>icons/up.png</file>
+        <file>icons/sheep.png</file>
     </qresource>
 </RCC>

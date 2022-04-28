@@ -37,7 +37,8 @@ protected:
     QMenu *act_Menu;
 
 signals:
-     void showwidget();
+     void showwidget();//显示主窗口信号
+     void CallSreenShot();//呼叫截图信号
 
 private:
     Ui::suspendball *ui;

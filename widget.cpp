@@ -6,6 +6,7 @@
 #include<QtDebug>
 #include "login.h"
 #include <Qtsql>
+#include <QDesktopWidget>
 //extern QString  UName;
 Widget::Widget(QWidget *parent,QString UName) :
     QWidget(parent),
@@ -22,6 +23,10 @@ Widget::Widget(QWidget *parent,QString UName) :
     connect(&myOCR,SIGNAL(sig_changebacktoselectmode()),this,SLOT(slot_changebacktoselectmode()));
     //调用截图后，显示主面板
     connect(myscreenwidget,SIGNAL(myclose()),this, SLOT(myshow()));
+    //在ball中点击截图或双击，调用截图模块并隐藏悬浮球
+    connect(ball,SIGNAL(CallSreenShot()),this, SLOT(ScreenShotShow()));
+    //截图成功后，在主界面的picPath自动填入路径
+    connect(myscreenwidget,SIGNAL(usethisPath()),this, SLOT(setPath()));
 }
 
 Widget::~Widget()
@@ -101,7 +106,7 @@ void Widget::initMember()
 
     this->myscreenwidget = ScreenWidget::Instance();
     //创建浮动小球
-    ball=new suspendball;
+    this->ball=new suspendball;
     //主面板显示，悬浮球隐藏
     connect(ball,SIGNAL(showwidget()),this, SLOT(showNormal()));
 
@@ -269,14 +274,24 @@ void Widget::on_btn_mine_clicked()
 void Widget::myshow()
 {
     this->show();
-    ui->picPath->setText(QString("%1/screen_%2.png").arg(qApp->applicationDirPath()).arg("temp"));
+    this->ball->hide();
 }
 
+void Widget::ScreenShotShow()
+{
+    this->ball->hide();//隐藏悬浮球
+    this->myscreenwidget->showFullScreen();//显示截图
+}
+
+void Widget::setPath(){
+    ui->picPath->setText(QString("%1/screen_%2.png").arg(qApp->applicationDirPath()).arg("temp"));
+}
 
 void Widget::on_btn_menu_item_2_clicked()
 {
     //a.setFont(QFont("Microsoft Yahei", 9));
-
+    this->hide();
+    ui->picPath->setText(QString(""));
 #if (QT_VERSION <= QT_VERSION_CHECK(5,0,0))
 #if _MSC_VER
     QTextCodec *codec = QTextCodec::codecForName("gbk");
@@ -292,5 +307,6 @@ void Widget::on_btn_menu_item_2_clicked()
 #endif
     myscreenwidget->showFullScreen();
        //直接调用实例
-    ui->picPath->setText(QString("%1/screen_%2.png").arg(qApp->applicationDirPath()).arg("temp"));
+//    ui->picPath->setText(QString("%1/screen_%2.png").arg(qApp->applicationDirPath()).arg("temp"));
 }
+

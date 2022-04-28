@@ -40,17 +40,17 @@ suspendball::suspendball(QWidget *parent) :
 
     QPixmap *pixw;
      pixw = new QPixmap(ui->label->size());
-      pixw->load(":/icons/logo.png");
+      pixw->load(":/icons/sheep.png");
       ui->label->setPixmap(*pixw);
 //     ui->label->setStyleSheet("background-image:url(:/icons/logo.png");
 
      act_Menu =new QMenu(this);
-     act_show=new QAction("show",this);
+     act_show=new QAction("显示主窗口",this);
     act_show->setFont(QFont("Arial", 9));
      act_show->setObjectName("returnNormal");
      act_show->setIcon(QIcon(":/icons/logo.png"));
-     act_jietu=new QAction("jietu",this);
-     act_delete=new QAction("delete",this);
+     act_jietu=new QAction("截图",this);
+     act_delete=new QAction("退出",this);
      act_delete->setIcon(QIcon(":/icons/out.png"));
 
 
@@ -62,25 +62,7 @@ suspendball::suspendball(QWidget *parent) :
 
         });
      connect(act_jietu, &QAction::triggered,this,[=](){
-
-#if (QT_VERSION <= QT_VERSION_CHECK(5,0,0))
-#if _MSC_VER
-    QTextCodec *codec = QTextCodec::codecForName("gbk");
-#else
-    QTextCodec *codec = QTextCodec::codecForName("utf-8");
-#endif
-    QTextCodec::setCodecForLocale(codec);
-    QTextCodec::setCodecForCStrings(codec);
-    QTextCodec::setCodecForTr(codec);
-#else
-    QTextCodec *codec = QTextCodec::codecForName("utf-8");
-    QTextCodec::setCodecForLocale(codec);
-#endif
-
-    ScreenWidget *temp=ScreenWidget::Instance();
-    temp->showFullScreen();   //直接调用实例
-    //ui->picPath->setText(QString("%1/screen_%2.png").arg(qApp->applicationDirPath()).arg("temp"));
-    temp->deleteLater();
+        emit CallSreenShot();
         });
      connect(act_delete, &QAction::triggered,this,[=](){
            connect(act_delete, SIGNAL(triggered()), qApp, SLOT(quit()));
@@ -132,25 +114,6 @@ void suspendball::mouseMoveEvent(QMouseEvent *event)
 //双击
 void suspendball::mouseDoubleClickEvent(QMouseEvent *event)
 {
-
-    //this->ball-
-    //this->_ball->hide();
-    #if (QT_VERSION <= QT_VERSION_CHECK(5,0,0))
-    #if _MSC_VER
-        QTextCodec *codec = QTextCodec::codecForName("gbk");
-    #else
-        QTextCodec *codec = QTextCodec::codecForName("utf-8");
-    #endif
-        QTextCodec::setCodecForLocale(codec);
-        QTextCodec::setCodecForCStrings(codec);
-        QTextCodec::setCodecForTr(codec);
-    #else
-        QTextCodec *codec = QTextCodec::codecForName("utf-8");
-        QTextCodec::setCodecForLocale(codec);
-    #endif
-
-        ScreenWidget::Instance()->showFullScreen();   //直接调用实例
-        //ui->picPath->setText(QString("%1/screen_%2.png").arg(qApp->applicationDirPath()).arg("temp"));
-
-
+    //发出信号,显示截图窗口
+    emit CallSreenShot();
 }

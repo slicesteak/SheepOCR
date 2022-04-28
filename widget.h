@@ -28,8 +28,6 @@ public:
     explicit Widget(QWidget *parent = 0,QString UName=0);
     QString  UName;//用户名
     ~Widget();
-     suspendball *ball;// 浮动小球
-    ScreenWidget *myscreenwidget; //截图模块
 
 private slots:
     void closeEvent(QCloseEvent *event);
@@ -51,6 +49,7 @@ private slots:
     void on_btn_menu_item_3_clicked();
 
     void on_btn_menu_item_6_clicked();
+
 
     //void receiveData(QString data);   //接收传递过来的数据的槽
 
@@ -77,12 +76,20 @@ private:
 
     ConfigWidget* cw;
 
+    suspendball *ball;// 浮动小球
+
+    ScreenWidget *myscreenwidget; //截图模块
+
 private slots:
     void slot_changebacktoselectmode();
 
     void on_btn_mine_clicked();
 
-    void myshow();
+    void ScreenShotShow();//显示截图窗口(隐藏悬浮球)
+
+    void myshow();//显示主窗口(隐藏悬浮球)
+
+    void setPath();//设置截图路径
     void on_btn_menu_item_2_clicked();
 };
 
