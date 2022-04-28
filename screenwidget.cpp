@@ -310,8 +310,11 @@ void ScreenWidget::saveFullOther()
 
 void ScreenWidget::ScreenShotHide(){
     this->hide();
-    emit this->myclose();
+    emit this->CancelScreenShot();//发送取消截图信号
 }
+
+
+
 
 void ScreenWidget::mouseMoveEvent(QMouseEvent *e)
 {

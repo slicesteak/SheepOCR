@@ -18,15 +18,25 @@ Widget::Widget(QWidget *parent,QString UName) :
     this->initUi();
     this->initMember();
 
+    status =  W;//初始化时设置当前状态为主窗口
 
     //手写一个信号和槽实现mode切换
     connect(&myOCR,SIGNAL(sig_changebacktoselectmode()),this,SLOT(slot_changebacktoselectmode()));
+
     //调用截图后，显示主面板
     connect(myscreenwidget,SIGNAL(myclose()),this, SLOT(myshow()));
+
     //在ball中点击截图或双击，调用截图模块并隐藏悬浮球
     connect(ball,SIGNAL(CallSreenShot()),this, SLOT(ScreenShotShow()));
+
     //截图成功后，在主界面的picPath自动填入路径
     connect(myscreenwidget,SIGNAL(usethisPath()),this, SLOT(setPath()));
+
+    //取消截图后，悬浮球显示恢复
+    connect(myscreenwidget,SIGNAL(CancelScreenShot()),this, SLOT(ReactToCancelScreenShot()));
+
+    //主面板显示，悬浮球隐藏
+    connect(ball,SIGNAL(showwidget()),this, SLOT(myshow()));
 }
 
 Widget::~Widget()
@@ -104,12 +114,10 @@ void Widget::initMember()
     trayIconMenu->addAction(quitAction);
     trayIcon->setContextMenu(trayIconMenu);
 
+    //创建截图模块
     this->myscreenwidget = ScreenWidget::Instance();
     //创建浮动小球
     this->ball=new suspendball;
-    //主面板显示，悬浮球隐藏
-    connect(ball,SIGNAL(showwidget()),this, SLOT(showNormal()));
-
 
     // 让小球显示出来
     ball->hide();
@@ -123,7 +131,7 @@ void Widget::littleShow()
     this->hide();//隐藏主窗口
     trayIcon->show();//显示托盘
     ball->show();
-
+    status =  B;//设置当前状态为悬浮球
     //显示到系统提示框的信息
     QString title="Peach";
     QString text="正自动在后台运行";
@@ -273,8 +281,19 @@ void Widget::on_btn_mine_clicked()
 
 void Widget::myshow()
 {
+    status = W; //主窗口显示并设置当前状态为主窗口
     this->show();
     this->ball->hide();
+}
+
+void Widget::ReactToCancelScreenShot(){
+
+    if(status==W){
+        myshow();//当截图前状态为主窗体的情况下，取消截图恢复主窗体
+    }
+    else if(status==B){
+        this->ball->show();//当截图前状态为悬浮球的情况下，取消截图恢复悬浮球
+    }
 }
 
 void Widget::ScreenShotShow()

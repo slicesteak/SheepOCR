@@ -66,14 +66,15 @@ protected:
 
 
 signals:
-    void myclose();//截图关闭信号
+    void myclose();//完成截图信号
+    void CancelScreenShot();//取消截图信号
     void usethisPath();//当使用当前截图时，发送自动设置路径信号
 private slots:
-    void usethis();
-    void saveScreen();
-    void saveFullScreen();
-    void saveScreenOther();
-    void saveFullOther();
-    void ScreenShotHide();
+    void usethis();//使用当前截图
+    void saveScreen();//保存当前截图
+    void saveFullScreen();//保存全屏
+    void saveScreenOther();//截图另存为
+    void saveFullOther();//全屏截图另存为
+    void ScreenShotHide();//取消截图
 };
 #endif // SCREENWIDGET_H

@@ -29,6 +29,9 @@ public:
     QString  UName;//用户名
     ~Widget();
 
+    enum STATUS {W,B};//枚举记录两种状态{主窗体，悬浮球}
+    STATUS status;
+
 private slots:
     void closeEvent(QCloseEvent *event);
 
@@ -90,6 +93,9 @@ private slots:
     void myshow();//显示主窗口(隐藏悬浮球)
 
     void setPath();//设置截图路径
+
+    void ReactToCancelScreenShot();//取消截图后的显示恢复(根据状态status是主窗口W还是悬浮球B恢复原来界面)
+
     void on_btn_menu_item_2_clicked();
 };
 
