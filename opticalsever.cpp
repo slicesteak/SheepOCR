@@ -65,7 +65,8 @@ void OpticalSever::sendRequest()
         return;
     }
     QUrl dest(configOption.getURL());
-    qDebug()<<configOption.getURL();
+    if(DEBUG_OUT_PUT)
+        qDebug()<<"the URL is :"<<configOption.getURL();
     if(dest.isEmpty())
     {
         this->infoNotice(INVALID_MODE);
@@ -80,14 +81,17 @@ void OpticalSever::sendRequest()
     body.append(imgBase64);
     reply=manager->post(request,body);
     canReceive=true;
-    qDebug()<<"成功send()";
+    if(DEBUG_OUT_PUT)
+        qDebug()<<"成功send()";
 }
 
 void OpticalSever::receiveResult(){
 
-    qDebug()<<"成功receive()";
+    if(DEBUG_OUT_PUT)
+        qDebug()<<"成功receive()";
     QByteArray data=reply->readAll();
-    qDebug()<<data;
+    if(DEBUG_OUT_PUT)
+        qDebug()<<data;
 
     QString resultArray;
     QString resultNum;
@@ -123,7 +127,8 @@ void OpticalSever::receiveResult(){
     case MODE_SEAL:break;
     }
 
-    qDebug()<<resultArray<<" "<<resultNum<<" "<<resultName<<endl;
+    if(DEBUG_OUT_PUT)
+        qDebug()<<resultArray<<" "<<resultNum<<" "<<resultName<<endl;
     QJsonDocument jsonFile=QJsonDocument::fromJson(data);
     QJsonValue value;
     QString contents;
@@ -234,6 +239,11 @@ void OpticalSever::infoNotice(int error_msg){
 
 QString OpticalSever::getResult(){
     //wait.
+    if(DEBUG_OUT_PUT){
+        qDebug()<<"QsslSocket="<<QSslSocket::sslLibraryVersionString();
+        qDebug()<<"OPENSSL支持情况"<<QSslSocket::supportsSsl();
+    }
+
     if(canReceive)
     {
         QTimer timer;

@@ -7,6 +7,7 @@
 #include<QJsonObject>
 #include<QJsonArray>
 #include<QtNetwork>
+#include <QSslSocket>
 #include<QUrl>
 #include<QFile>
 #include<QtDebug>
@@ -14,6 +15,7 @@
 #include<QObject>
 #include"mymessagebox.h"
 
+#define DEBUG_OUT_PUT 0 //调试结果输出到控制台，0表示否，不输出；1表示输出
 
 //error info
 #define IMG_MAX_SIZE 4194304
