@@ -6,7 +6,7 @@ Option::Option():mode(MODE_ACCURATE_BASIC)
   ,app_id("25882743")
   ,api_key("6rkXHclKC0LKkSsm4GZTlySz")
   ,secret_key("tISesOCtKxrIyjMD5uHpnubxgkhBm6fW")
-    ,accessToken("24.ee411a21021406f10e64e7ca6cc84cd8.2592000.1651311561.282335-25882743")
+    ,accessToken("24.b741a35db7fe2f6db11570cabd37f814.2592000.1653915716.282335-25882743")
     ,URLProfix("https://aip.baidubce.com/rest/2.0/ocr/v1/")
 {
 
