@@ -20,6 +20,8 @@ Widget::Widget(QWidget *parent,QString UName) :
 
     status =  W;//初始化时设置当前状态为主窗口
 
+    ui->sw_main->setCurrentIndex(1);
+
     //手写一个信号和槽实现mode切换
     connect(&myOCR,SIGNAL(sig_changebacktoselectmode()),this,SLOT(slot_changebacktoselectmode()));
 
@@ -237,13 +239,12 @@ void Widget::on_btn_menu_item_3_clicked()
     QString result=myOCR.getResult();
     ui->lab_mess_1->setText(result);
     if(!result.isEmpty()){
-        ui->lab_mess_1->setScaledContents(true);
-        ui->lab_mess_1->adjustSize();
-        ui->lab_mess_1->setGeometry(QRect(328, 240, 329, 27*4));  //四倍行距
-        ui->lab_mess_1->setWordWrap(true);
-        ui->lab_mess_1->setAlignment(Qt::AlignCenter);
-
-        ui->lab_mess_1->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        //ui->lab_mess_1->setScaledContents(true);
+        //ui->lab_mess_1->adjustSize();
+        //ui->lab_mess_1->setGeometry(QRect(328, 240, 329, 27*4));  //四倍行距
+        //ui->lab_mess_1->setWordWrap(true);
+        //ui->lab_mess_1->setAlignment(Qt::AlignCenter);
+        //ui->lab_mess_1->setTextInteractionFlags(Qt::TextSelectableByMouse);
     }
     ui->picPath->clear();
 }
