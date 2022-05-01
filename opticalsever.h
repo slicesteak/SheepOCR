@@ -44,6 +44,7 @@ public:
     QString path;//待识别的图片存放路径
     int mode; //识别模式
     Option();
+    Option(QString app_id,QString api_key,QString secret_key,QString accessToken);
     ~Option();
     QString getURL();
 
@@ -61,10 +62,11 @@ class OpticalSever: public QObject
     
 public:
 
-    Option configOption;
+    Option* configOption;
     QNetworkAccessManager *manager;//用于管理请求数据的发送
     bool canReceive;
     OpticalSever(QObject * parent);
+    OpticalSever(QObject * parent,QString app_id,QString api_key,QString secret_key,QString accessToken);
     ~OpticalSever();
 
     void setConfig();  //设置识别选项

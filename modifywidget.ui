@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>735</width>
     <height>300</height>
    </rect>
   </property>
@@ -17,9 +17,9 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>48</y>
-     <width>291</width>
-     <height>23</height>
+     <y>22</y>
+     <width>631</width>
+     <height>51</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -31,15 +31,21 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="SKLineEdit"/>
+     <widget class="QLineEdit" name="SKLineEdit">
+      <property name="font">
+       <font>
+        <pointsize>5</pointsize>
+       </font>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
   <widget class="QPushButton" name="confirmBtn">
    <property name="geometry">
     <rect>
-     <x>157</x>
-     <y>213</y>
+     <x>330</x>
+     <y>230</y>
      <width>71</width>
      <height>41</height>
     </rect>
@@ -52,9 +58,9 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>81</y>
-     <width>291</width>
-     <height>23</height>
+     <y>68</y>
+     <width>631</width>
+     <height>51</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -75,8 +81,8 @@
     <rect>
      <x>51</x>
      <y>120</y>
-     <width>291</width>
-     <height>23</height>
+     <width>631</width>
+     <height>51</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_10">
@@ -96,9 +102,9 @@
    <property name="geometry">
     <rect>
      <x>51</x>
-     <y>154</y>
-     <width>291</width>
-     <height>23</height>
+     <y>179</y>
+     <width>631</width>
+     <height>41</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_9">

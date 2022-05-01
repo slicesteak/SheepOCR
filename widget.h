@@ -25,10 +25,8 @@ class Widget : public QWidget
     Q_OBJECT
 
 public:
-    explicit Widget(QWidget *parent = 0,QString UName=0);
-    QString  UName;//用户名
+    explicit Widget(QWidget *parent = 0,QString UName=0,int guest_flag=1);
     ~Widget();
-
     enum STATUS {W,B};//枚举记录两种状态{主窗体，悬浮球}
     STATUS status;
 
@@ -75,13 +73,21 @@ private:
     void littleShow();      //最小化显示函数
 
 
-    OpticalSever myOCR;
+    OpticalSever* myOCR;
 
     ConfigWidget* cw;
 
     suspendball *ball;// 浮动小球
 
     ScreenWidget *myscreenwidget; //截图模块
+
+    int guest_flag;//是否登录的标记，1为未登录
+
+    QString  UName;//用户名
+    QString app_id;
+    QString api_key;
+    QString secret_key;
+    QString accessToken;
 
 private slots:
     void slot_changebacktoselectmode();

@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
     //屏幕拖动
     AppInit::Instance()->start();
     Login lw;
+    lw.show();
     if(CONNECT_DB==1){
 
         //连接数据库
@@ -52,9 +53,6 @@ int main(int argc, char *argv[])
         lw.show();
     }
 
-
-    Widget w;
-    w.show();
 
     return a.exec();
 }

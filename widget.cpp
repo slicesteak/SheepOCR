@@ -8,11 +8,18 @@
 #include <Qtsql>
 #include <QDesktopWidget>
 //extern QString  UName;
-Widget::Widget(QWidget *parent,QString UName) :
+Widget::Widget(QWidget *parent,QString UName,int guest_flag) :
     QWidget(parent),
-    ui(new Ui::Widget),myOCR(0)
+    ui(new Ui::Widget)
 {
+    if(CONNECT_DB==1&&guest_flag!=1){
+        this->myOCR=new OpticalSever(0,this->app_id,this->api_key,this->secret_key,this->accessToken);
+    }
+    else{
+        this->myOCR=new OpticalSever(0);
+    }
     this->UName=UName;
+    this->guest_flag=guest_flag;
     ui->setupUi(this);
     this->setProperty("canMove",true);
     this->initUi();
@@ -23,7 +30,7 @@ Widget::Widget(QWidget *parent,QString UName) :
     ui->sw_main->setCurrentIndex(1);
 
     //手写一个信号和槽实现mode切换
-    connect(&myOCR,SIGNAL(sig_changebacktoselectmode()),this,SLOT(slot_changebacktoselectmode()));
+    connect(myOCR,SIGNAL(sig_changebacktoselectmode()),this,SLOT(slot_changebacktoselectmode()));
 
     //调用截图后，显示主面板
     connect(myscreenwidget,SIGNAL(myclose()),this, SLOT(myshow()));
@@ -202,41 +209,41 @@ void Widget::on_btn_menu_item_3_clicked()
     ui->sw_main->setCurrentIndex(0);
     ui->lab_mess_1->setText("识别中...");
 
-    myOCR.configOption.path=ui->picPath->toPlainText();
+    myOCR->configOption->path=ui->picPath->toPlainText();
 
     if(ui->radioButton->isChecked()){
-        myOCR.configOption.mode=MODE_ACCURATE_BASIC ;    //通用文字识别（高精度版）
+        myOCR->configOption->mode=MODE_ACCURATE_BASIC ;    //通用文字识别（高精度版）
     }else if(ui->radioButton_3->isChecked()){
-        myOCR.configOption.mode=MODE_ACCURATE ;  //通用文字识别（高精度含位置版）
+        myOCR->configOption->mode=MODE_ACCURATE ;  //通用文字识别（高精度含位置版）
     }else if(ui->radioButton_2->isChecked()){
-        myOCR.configOption.mode=MODE_GENERAL_BASIC ; //通用文字识别（标准版）
+        myOCR->configOption->mode=MODE_GENERAL_BASIC ; //通用文字识别（标准版）
     }else if(ui->radioButton_4->isChecked()){
-        myOCR.configOption.mode=MODE_GENERAL ;  //通用文字识别（标准含位置版）
+        myOCR->configOption->mode=MODE_GENERAL ;  //通用文字识别（标准含位置版）
     }else if(ui->radioButton_12->isChecked()){
-        myOCR.configOption.mode=MODE_DOC_ANALYSIS_OFFICE; //办公文档识别
+        myOCR->configOption->mode=MODE_DOC_ANALYSIS_OFFICE; //办公文档识别
     }else if(ui->radioButton_11->isChecked()){
-        myOCR.configOption.mode=MODE_WEBIMAGE; //网络图片文字识别
+        myOCR->configOption->mode=MODE_WEBIMAGE; //网络图片文字识别
     }else if(ui->radioButton_9->isChecked()){
-        myOCR.configOption.mode=MODE_WEBIMAGE_LOC ;  //网络图片文字识别（含位置版）
+        myOCR->configOption->mode=MODE_WEBIMAGE_LOC ;  //网络图片文字识别（含位置版）
     }else if(ui->radioButton_10->isChecked()){
-        myOCR.configOption.mode=MODE_HANDWRITING; //手写文字识别
+        myOCR->configOption->mode=MODE_HANDWRITING; //手写文字识别
     }else if(ui->radioButton_8->isChecked()){
-        myOCR.configOption.mode=MODE_TABLE ;   //表格文字识别V2
+        myOCR->configOption->mode=MODE_TABLE ;   //表格文字识别V2
     }else if(ui->radioButton_7->isChecked()){
-        myOCR.configOption.mode=MODE_TABLE ;  //表格文字识别V2
+        myOCR->configOption->mode=MODE_TABLE ;  //表格文字识别V2
     }else if(ui->radioButton_6->isChecked()){
-        myOCR.configOption.mode=MODE_TABLE; //表格文字识别V2
+        myOCR->configOption->mode=MODE_TABLE; //表格文字识别V2
     }else if(ui->radioButton_5->isChecked()){
-        myOCR.configOption.mode=MODE_SEAL ;  //印章识别
+        myOCR->configOption->mode=MODE_SEAL ;  //印章识别
     }else if(ui->radioButton_13->isChecked()){
-        myOCR.configOption.mode=MODE_NUMBERS ;  //数字识别
+        myOCR->configOption->mode=MODE_NUMBERS ;  //数字识别
     }else if(ui->radioButton_14->isChecked()){
-        myOCR.configOption.mode=MODE_QRCODE ;  //二维码识别
+        myOCR->configOption->mode=MODE_QRCODE ;  //二维码识别
     }
 
-    myOCR.start();
+    myOCR->start();
     //qDebug()<<"hello res:"<<myOCR.getResult()<<endl;
-    QString result=myOCR.getResult();
+    QString result=myOCR->getResult();
     ui->lab_mess_1->setText(result);
     if(!result.isEmpty()){
         //ui->lab_mess_1->setScaledContents(true);
@@ -260,23 +267,28 @@ void Widget::on_btn_menu_item_6_clicked()
 
 void Widget::on_btn_mine_clicked()
 {
-    QString Username,PW,ID,APIK,SK,Token;
-    QString s=QString("select username,app_id,api_key,sk,token from user where username='%1' ").arg(UName);
-    //查询数据库如果账号和密码匹配返回真否则返回假
-    QSqlQuery query;
-    query.exec(s);
-    while(query.next()){
-        Username=query.value(0).toString();
-        ID=query.value(1).toString();
-        APIK=query.value(2).toString();
-        SK=query.value(3).toString();
-        Token=query.value(4).toString();
+    if(this->guest_flag==1){
+
     }
-    cw=new ConfigWidget(nullptr,Username,ID,APIK,SK,Token);
-    this->hide();
-    cw->show();
-    cw->exec();
-    this->show();
+    else{
+        QString Username,PW,ID,APIK,SK,Token;
+        QString s=QString("select username,app_id,api_key,sk,token from user where username='%1' ").arg(UName);
+        //查询数据库如果账号和密码匹配返回真否则返回假
+        QSqlQuery query;
+        query.exec(s);
+        while(query.next()){
+            Username=query.value(0).toString();
+            ID=query.value(1).toString();
+            APIK=query.value(2).toString();
+            SK=query.value(3).toString();
+            Token=query.value(4).toString();
+        }
+        cw=new ConfigWidget(nullptr,Username,ID,APIK,SK,Token);
+        this->hide();
+        cw->show();
+        cw->exec();
+        this->show();
+    }
 }
 
 

@@ -12,11 +12,34 @@ Option::Option():mode(MODE_ACCURATE_BASIC)
 
 }
 
+Option::Option(QString app_id,QString api_key,QString secret_key,QString accessToken):mode(MODE_ACCURATE_BASIC)
+  ,app_id(app_id)
+  ,api_key(api_key)
+  ,secret_key(secret_key)
+    ,accessToken(accessToken)
+    ,URLProfix("https://aip.baidubce.com/rest/2.0/ocr/v1/")
+{
+
+}
+
 Option::~Option(){}
 
 
 OpticalSever::OpticalSever(QObject * parent):QObject(parent)
 {
+    this->configOption=new Option();
+    manager=new QNetworkAccessManager();
+    this->OCR_notice_box = new MyMessageBox();
+    canReceive=false;
+    //通信完成后，自动执行receive 结果
+    connect(this->manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveResult()));
+    //解除绑定
+    //disconnect(this->manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveResult()));
+}
+
+OpticalSever::OpticalSever(QObject * parent,QString app_id,QString api_key,QString secret_key,QString accessToken):QObject(parent)
+{
+    this->configOption=new Option(app_id,api_key,secret_key,accessToken);
     manager=new QNetworkAccessManager();
     this->OCR_notice_box = new MyMessageBox();
     canReceive=false;
@@ -30,9 +53,9 @@ OpticalSever::~OpticalSever(){}
 
 void OpticalSever::start()
 {
-    configOption.path.replace("file:///","");
+    configOption->path.replace("file:///","");
 
-    QFile myfile(this->configOption.path);
+    QFile myfile(this->configOption->path);
     if(myfile.exists())
     {
         scanPic();
@@ -44,7 +67,7 @@ void OpticalSever::start()
 
 void OpticalSever::scanPic()
 {
-    QImage img(this->configOption.path);
+    QImage img(this->configOption->path);
     QByteArray imageData;
     QBuffer buffer(&imageData);
     img.save(&buffer,"png");    
@@ -64,9 +87,9 @@ void OpticalSever::sendRequest()
         this->infoNotice(IMG_OVER_SIZE);
         return;
     }
-    QUrl dest(configOption.getURL());
+    QUrl dest(configOption->getURL());
     if(DEBUG_OUT_PUT)
-        qDebug()<<"the URL is :"<<configOption.getURL();
+        qDebug()<<"the URL is :"<<configOption->getURL();
     if(dest.isEmpty())
     {
         this->infoNotice(INVALID_MODE);
@@ -97,7 +120,7 @@ void OpticalSever::receiveResult(){
     QString resultNum;
     QString resultName;
 
-    switch (this->configOption.mode)
+    switch (this->configOption->mode)
     {
     case MODE_ACCURATE_BASIC:
     case MODE_ACCURATE:
@@ -223,7 +246,7 @@ void OpticalSever::infoNotice(int error_msg){
             OCR_notice_box->setBodyText("文件体积过大，请重新选择图片"); //设置正文内容
             break;
         case IMG_NOT_EXIST:
-            OCR_notice_box->setBodyText("图片"+this->configOption.path+"不存在，请重新选择图片");
+            OCR_notice_box->setBodyText("图片"+this->configOption->path+"不存在，请重新选择图片");
             break;
         case INVALID_MODE:
             OCR_notice_box->setBodyText("识别模式设置错误");            

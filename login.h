@@ -27,6 +27,8 @@ private slots:
 
     void on_sendBtn_clicked();
 
+    void on_passBtn_clicked();
+
 private:
     Widget* w;
 
