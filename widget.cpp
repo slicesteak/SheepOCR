@@ -8,17 +8,56 @@
 #include <Qtsql>
 #include <QDesktopWidget>
 //extern QString  UName;
+
+//非游客模式构造函数
+Widget::Widget(QWidget *parent,QString UName,QString app_id,QString api_key,QString secret_key,QString token,int guest_flag) :
+    QWidget(parent),
+    ui(new Ui::Widget)
+{
+
+    this->UName=UName;
+    this->app_id=app_id;
+    this->api_key=api_key;
+    this->secret_key=secret_key;
+    this->accessToken=token;
+    this->myOCR=new OpticalSever(0,this->app_id,this->api_key,this->secret_key,this->accessToken);
+
+    this->guest_flag=guest_flag;
+    ui->setupUi(this);
+    this->setProperty("canMove",true);
+    this->initUi();
+    this->initMember();
+
+    status =  W;//初始化时设置当前状态为主窗口
+
+    ui->sw_main->setCurrentIndex(1);
+
+    //手写一个信号和槽实现mode切换
+    connect(myOCR,SIGNAL(sig_changebacktoselectmode()),this,SLOT(slot_changebacktoselectmode()));
+
+    //调用截图后，显示主面板
+    connect(myscreenwidget,SIGNAL(myclose()),this, SLOT(myshow()));
+
+    //在ball中点击截图或双击，调用截图模块并隐藏悬浮球
+    connect(ball,SIGNAL(CallSreenShot()),this, SLOT(ScreenShotShow()));
+
+    //截图成功后，在主界面的picPath自动填入路径
+    connect(myscreenwidget,SIGNAL(usethisPath()),this, SLOT(setPath()));
+
+    //取消截图后，悬浮球显示恢复
+    connect(myscreenwidget,SIGNAL(CancelScreenShot()),this, SLOT(ReactToCancelScreenShot()));
+
+    //主面板显示，悬浮球隐藏
+    connect(ball,SIGNAL(showwidget()),this, SLOT(myshow()));
+}
+
+//游客模式构造函数
 Widget::Widget(QWidget *parent,QString UName,int guest_flag) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
-    if(CONNECT_DB==1&&guest_flag!=1){
-        this->myOCR=new OpticalSever(0,this->app_id,this->api_key,this->secret_key,this->accessToken);
-    }
-    else{
-        this->myOCR=new OpticalSever(0);
-    }
     this->UName=UName;
+    this->myOCR=new OpticalSever(0);
     this->guest_flag=guest_flag;
     ui->setupUi(this);
     this->setProperty("canMove",true);
@@ -271,23 +310,25 @@ void Widget::on_btn_mine_clicked()
 
     }
     else{
-        QString Username,PW,ID,APIK,SK,Token;
-        QString s=QString("select username,app_id,api_key,sk,token from user where username='%1' ").arg(UName);
-        //查询数据库如果账号和密码匹配返回真否则返回假
-        QSqlQuery query;
-        query.exec(s);
-        while(query.next()){
-            Username=query.value(0).toString();
-            ID=query.value(1).toString();
-            APIK=query.value(2).toString();
-            SK=query.value(3).toString();
-            Token=query.value(4).toString();
-        }
-        cw=new ConfigWidget(nullptr,Username,ID,APIK,SK,Token);
+//        QString Username,PW,ID,APIK,SK,Token;
+//        QString s=QString("select username,app_id,api_key,sk,token from user where username='%1' ").arg(UName);
+//        //查询数据库如果账号和密码匹配返回真否则返回假
+//        QSqlQuery query;
+//        query.exec(s);
+//        while(query.next()){
+//            Username=query.value(0).toString();
+//            ID=query.value(1).toString();
+//            APIK=query.value(2).toString();
+//            SK=query.value(3).toString();
+//            Token=query.value(4).toString();
+//        }
+       // cw=new ConfigWidget(nullptr,Username,ID,APIK,SK,Token);
+        cw=new ConfigWidget(nullptr,this->UName,this->app_id,this->api_key,this->secret_key,this->accessToken);
         this->hide();
         cw->show();
         cw->exec();
         this->show();
+
     }
 }
 

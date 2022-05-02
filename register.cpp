@@ -8,6 +8,9 @@
 Registerwindow::Registerwindow(QWidget *parent)
     :QDialog(parent)
 {
+    //连接服务器
+    client.init();
+    client.connectServer();
     //登陆界面定义
     setWindowTitle(tr("注册界面"));
     //窗口只能最小化
@@ -55,43 +58,60 @@ Registerwindow::Registerwindow(QWidget *parent)
 //槽函数实现
 void Registerwindow::confirm_slots()
 {
-    QString UName = UserNameEdit->text();
-    //QString email = EmailEdit->text();
-    QString Pword;
-    if(PasswordEdit->text()==RePasswordEdit->text())
-    {
-        Pword = PasswordEdit->text();
-        if(CONNECT_DB==1){
-            QString i=QString("insert into user(username,password) values ('%1','%2'); ").arg(UName).arg(Pword);
-            QString S =QString("select * from user where username='%1' ").arg(UName);
-            QSqlQuery query;
-            if(query.exec(i)){
-                QMessageBox::information(NULL, "注册成功", "注册成功！！！", QMessageBox::Yes);
-                this->close();
-                Login w;
-                w.show();
-            }
-            else if(query.exec(S)&&query.first()){
-                QMessageBox::warning(NULL,"Error","用户名重复，请重试！！！");
-                this->close();
-            }
-            else{
-                QMessageBox::warning(NULL,"Error","注册失败，请重试！！！");
-                this->close();
-            }
-        }
-        else{
-            QMessageBox::information(NULL, "注册成功", "注册成功！！！", QMessageBox::Yes);
-            this->close();
-            Login w;
-            w.show();
-        }
+    QString userName=UserNameEdit->text();
+    QString passward=PasswordEdit->text();
+    QString repassword=RePasswordEdit->text();
+    if(userName=="" || passward==""||repassword=="")
+        QMessageBox::information(this,"警告","输入不能为空",QMessageBox::Ok);
+    else if(passward!=repassword)
+        QMessageBox::information(this,"警告","密码不重复，请重试！！！");
+    else{
+        QString as="a";
+        QString data=as+"#"+userName+"#"+passward;
+        client.write(data);
+        //timer->start(10);
     }
-    else
-        QMessageBox::warning(NULL,"Error","密码不重复，请重试！！！");
+
+
+//    QString UName = UserNameEdit->text();
+//    //QString email = EmailEdit->text();
+//    QString Pword;
+//    if(PasswordEdit->text()==RePasswordEdit->text())
+//    {
+//        Pword = PasswordEdit->text();
+//        if(CONNECT_DB==1){
+//            QString i=QString("insert into user(username,password) values ('%1','%2'); ").arg(UName).arg(Pword);
+//            QString S =QString("select * from user where username='%1' ").arg(UName);
+//            QSqlQuery query;
+//            if(query.exec(i)){
+//                QMessageBox::information(NULL, "注册成功", "注册成功！！！", QMessageBox::Yes);
+//                this->close();
+//                Login w;
+//                w.show();
+//            }
+//            else if(query.exec(S)&&query.first()){
+//                QMessageBox::warning(NULL,"Error","用户名重复，请重试！！！");
+//                this->close();
+//            }
+//            else{
+//                QMessageBox::warning(NULL,"Error","注册失败，请重试！！！");
+//                this->close();
+//            }
+//        }
+//        else{
+//            QMessageBox::information(NULL, "注册成功", "注册成功！！！", QMessageBox::Yes);
+//            this->close();
+//            Login w;
+//            w.show();
+//        }
+//    }
+//    else
+//        QMessageBox::warning(NULL,"Error","密码不重复，请重试！！！");
 }
 
 Registerwindow::~Registerwindow()
 {
 
 }
+
+

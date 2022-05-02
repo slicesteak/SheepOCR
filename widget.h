@@ -16,6 +16,8 @@
 #include "modifywidget.h"
 #include<suspendball.h>
 
+#include "tcpclient.h"
+
 namespace Ui {
 class Widget;
 }
@@ -25,6 +27,7 @@ class Widget : public QWidget
     Q_OBJECT
 
 public:
+    explicit Widget(QWidget *parent = 0,QString UName=0,QString app_id=0,QString api_key=0,QString secret_key=0,QString token=0,int guest_flag=1);
     explicit Widget(QWidget *parent = 0,QString UName=0,int guest_flag=1);
     ~Widget();
     enum STATUS {W,B};//枚举记录两种状态{主窗体，悬浮球}
@@ -52,7 +55,19 @@ private slots:
     void on_btn_menu_item_6_clicked();
 
 
-    //void receiveData(QString data);   //接收传递过来的数据的槽
+    void slot_changebacktoselectmode();
+
+    void on_btn_mine_clicked();
+
+    void ScreenShotShow();//显示截图窗口(隐藏悬浮球)
+
+    void myshow();//显示主窗口(隐藏悬浮球)
+
+    void setPath();//设置截图路径
+
+    void ReactToCancelScreenShot();//取消截图后的显示恢复(根据状态status是主窗口W还是悬浮球B恢复原来界面)
+
+    void on_btn_menu_item_2_clicked();
 
 private:
     Ui::Widget *ui;
@@ -89,20 +104,7 @@ private:
     QString secret_key;
     QString accessToken;
 
-private slots:
-    void slot_changebacktoselectmode();
-
-    void on_btn_mine_clicked();
-
-    void ScreenShotShow();//显示截图窗口(隐藏悬浮球)
-
-    void myshow();//显示主窗口(隐藏悬浮球)
-
-    void setPath();//设置截图路径
-
-    void ReactToCancelScreenShot();//取消截图后的显示恢复(根据状态status是主窗口W还是悬浮球B恢复原来界面)
-
-    void on_btn_menu_item_2_clicked();
+    TcpClient client;//用于与服务器连接
 };
 
 #endif // WIDGET_H
