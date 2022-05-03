@@ -383,3 +383,4 @@ void Widget::on_btn_menu_item_2_clicked()
 //    ui->picPath->setText(QString("%1/screen_%2.png").arg(qApp->applicationDirPath()).arg("temp"));
 }
 
+

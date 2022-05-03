@@ -39,70 +39,47 @@ void MySql::createtable()
 QString MySql::loguser(QString name, QString password)
 {
     QString info;
-    QString Username,ID,APIK,SK,Token;
     QString str=QString("select username,app_id,api_key,sk,token from user where username='%1' and password='%2'").arg(name).arg(password);
-    query=new QSqlQuery;
-    if(query->exec(str)){
-        while(query->next()){
-            Username=query->value(0).toString();
-            ID=query->value(1).toString();
-            APIK=query->value(2).toString();
-            SK=query->value(3).toString();
-            Token=query->value(4).toString();
-        }
-        info="#true#"+Username+"#"+ID+"#"+APIK+"#"+SK+"#"+Token;
-    }
-    else{
-        info="#false";
-    }
+    info=ExecuteSqlEx(str);
     return info;
-//    query->last();
-//    int record=query->at()+1;
-//    if(record==0)
-//        return false;
-//    return true;
 }
 
 
 bool MySql::signup(QString name,QString password)
-{
+{  
     QString i=QString("insert into user(username,password) values ('%1','%2'); ").arg(name).arg(password);
-    //QString S =QString("select * from user where username='%1' ").arg(name);
-    QSqlQuery query;
-    if(query.exec(i)){
-        return true;
-    }
-    else{
-        return false;
-    }
-
-
-//    QString str=QString("select * from user where username='%1").arg(name);
-//    query=new QSqlQuery;
-//    query->exec(str);
-//    query->last();
-//    int record=query->at()+1;
-//    if(record!=0)
-//        return false;
-//    str=QString("insert into user value('%1','%2')").arg(name).arg(password);
-//    bool ret=query->exec(str);
-//    return ret;
+    return ExecuteSql(i);
 }
 
 
 QString MySql::getinfo(QString name)
 {
-    QString Username,ID,APIK,SK,Token;
     QString s=QString("select username,app_id,api_key,sk,token from user where username='%1' ").arg(name);
+    QString info=ExecuteSqlEx(s);
+    return info;
+}
+
+bool MySql::ExecuteSql(QString strSQL){
     QSqlQuery query;
-    query.exec(s);
-    while(query.next()){
-        Username=query.value(0).toString();
-        ID=query.value(1).toString();
-        APIK=query.value(2).toString();
-        SK=query.value(3).toString();
-        Token=query.value(4).toString();
+    if(query.exec(strSQL)){
+        return true;
     }
-    QString info="#"+Username+"#"+ID+"#"+APIK+"#"+SK+"#"+Token;
+    else{
+        return false;
+    }
+}
+
+QString MySql::ExecuteSqlEx(QString strSQL){
+    QSqlQuery query;
+    QString info;
+    if(query.exec(strSQL)){
+        int i=0;
+        while(query.next()){
+            info+="#"+query.value(i++).toString();
+        }
+    }
+    else{
+        info+="#false";
+    }
     return info;
 }

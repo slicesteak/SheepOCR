@@ -14,7 +14,6 @@ public:
     ~TcpClient();
     void init();
     void connectServer();
-    void disconnect();
     bool get_status();
     void write(QString data);
     int login_status;//登录状态

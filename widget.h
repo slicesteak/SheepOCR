@@ -69,6 +69,7 @@ private slots:
 
     void on_btn_menu_item_2_clicked();
 
+
 private:
     Ui::Widget *ui;
 
