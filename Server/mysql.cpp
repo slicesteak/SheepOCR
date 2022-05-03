@@ -1,5 +1,4 @@
 #include "mysql.h"
-
 MySql::MySql()
 {
 
@@ -7,22 +6,28 @@ MySql::MySql()
 
 void MySql::initsql(QString ip)
 {
-    QSqlDatabase db=QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName(ip);
-    db.setUserName("root");
-    //db.setPassword("!@#123");
-    db.setDatabaseName("user");
-    if(db.open())
+    if(ip==""){
+        QMessageBox::information(0,"信息提示","请输入数据库ip地址",QMessageBox::Ok);
+    }else{
+        QSqlDatabase db=QSqlDatabase::addDatabase("QMYSQL");
+        db.setHostName(ip);
+        db.setUserName("root");
+        //db.setPassword("!@#123");
+        db.setDatabaseName("user");
+        if(db.open())
         {
             qDebug()<<"Database connected successfully!";
+            QMessageBox::information(0,"信息提示","数据库连接成功!",QMessageBox::Ok);
             //createtable();
             return;
         }
-    else
+        else
         {
             qDebug()<<"Database connected failed!";
+            QMessageBox::information(0,"信息提示","数据库连接失败!",QMessageBox::Ok);
             return;
         }
+    }
 }
 
 void MySql::createtable()
@@ -73,9 +78,15 @@ QString MySql::ExecuteSqlEx(QString strSQL){
     QSqlQuery query;
     QString info;
     if(query.exec(strSQL)){
-        int i=0;
-        while(query.next()){
-            info+="#"+query.value(i++).toString();
+        query.last();
+        int record=query.at()+1;
+        if(record==0)
+            info+="#false";
+        else{
+            int i=0;
+            while(query.next()){
+                info+="#"+query.value(i++).toString();
+            }
         }
     }
     else{
