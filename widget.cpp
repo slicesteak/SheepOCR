@@ -5,7 +5,7 @@
 #include <QGraphicsDropShadowEffect>
 #include<QtDebug>
 #include "login.h"
-#include <Qtsql>
+#include <qfiledialog.h>
 #include <QDesktopWidget>
 //extern QString  UName;
 
@@ -17,7 +17,6 @@ Widget::Widget(QWidget *parent,QString UName,QString app_id,QString api_key,QStr
 
     helpinfowidget = new helpinfo();//创建新界面窗口
     donatewidget = new donate();//创建新界面窗口
-
     this->UName=UName;
     this->app_id=app_id;
     this->api_key=api_key;
@@ -100,6 +99,25 @@ Widget::~Widget()
     delete ui;
 }
 
+void Widget::update(){ //更新修改后的信息
+    client.init();
+    client.connectServer();
+     while(!client.get_status()){
+         QCoreApplication::processEvents();
+     }
+    QString ds="d";
+    QString data=ds+"#"+this->UName;
+    client.write(data);
+    while(client.info_ready!=2){
+        QCoreApplication::processEvents();
+    }
+    this->UName=client.UName;
+    this->app_id=client.app_id;
+    this->api_key=client.api_key;
+    this->secret_key=client.secret_key;
+    this->accessToken=client.accessToken;
+}
+
 /**********************************************************初始化函数****************************************************************/
 
 void Widget::initUi()
@@ -170,6 +188,7 @@ void Widget::initMember()
     trayIconMenu->addAction(quitAction);
     trayIcon->setContextMenu(trayIconMenu);
 
+    trayIcon->show();
     //创建截图模块
     this->myscreenwidget = ScreenWidget::Instance();
     //创建浮动小球
@@ -259,6 +278,12 @@ void Widget::on_btn_littleshow_clicked()
     showMinimized();
 }
 
+void Widget::on_btn_menu_item_1_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("选择图片上传"), ".", tr("Images (*.png *.xpm *.jpg)"));
+    ui->picPath->setText(fileName);
+}
+
 void Widget::on_btn_menu_item_3_clicked()
 {
     ui->sw_main->setCurrentIndex(0);
@@ -318,23 +343,11 @@ void Widget::on_btn_mine_clicked()
 
     }
     else{
-//        QString Username,PW,ID,APIK,SK,Token;
-//        QString s=QString("select username,app_id,api_key,sk,token from user where username='%1' ").arg(UName);
-//        //查询数据库如果账号和密码匹配返回真否则返回假
-//        QSqlQuery query;
-//        query.exec(s);
-//        while(query.next()){
-//            Username=query.value(0).toString();
-//            ID=query.value(1).toString();
-//            APIK=query.value(2).toString();
-//            SK=query.value(3).toString();
-//            Token=query.value(4).toString();
-//        }
-       // cw=new ConfigWidget(nullptr,Username,ID,APIK,SK,Token);
         cw=new ConfigWidget(nullptr,this->UName,this->app_id,this->api_key,this->secret_key,this->accessToken);
         this->hide();
         cw->show();
         cw->exec();
+        update();
         this->show();
 
     }

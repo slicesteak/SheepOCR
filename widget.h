@@ -52,6 +52,8 @@ private slots:
 
     void on_btn_littleshow_clicked();
 
+     void on_btn_menu_item_1_clicked();
+
     void on_btn_menu_item_3_clicked();
 
     void on_btn_menu_item_6_clicked();
@@ -77,6 +79,8 @@ private slots:
 
 private:
     Ui::Widget *ui;
+
+    void update();
 
     MyMessageBox *myMbox;
     //自定义窗口通信参数

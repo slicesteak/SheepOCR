@@ -2,6 +2,7 @@
 #define MODIFYWIDGET_H
 
 #include <QDialog>
+#include"tcpclient.h"
 
 namespace Ui {
 class ModifyWidget;
@@ -26,6 +27,7 @@ private:
     QString accessToken;
     Ui::ModifyWidget *ui;
     void initUi();
+    TcpClient client;
 };
 
 #endif // MODIFYWIDGET_H

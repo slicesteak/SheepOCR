@@ -11,16 +11,17 @@ class MySql
 {
 public:
     MySql();
-    void initsql(QString ip,QString password);
+    void initsql(QString ip,QString username,QString password);
     void createtable();
     bool ExecuteSql(QString strSQL);//执行不返回数据集的SQL语句
     QString ExecuteSqlEx(QString strSQL);//执行返回数据集的SQL语句
     QString loguser(QString name,QString passward);
     bool signup(QString name,QString passward);
+    bool modify(QString username,QString AppID,QString APIK,QString SK,QString token);
     QString getinfo(QString name);
 
 private:
-    QSqlQuery *query;
+    QSqlQuery query;
 };
 
 #endif // MYSQL_H

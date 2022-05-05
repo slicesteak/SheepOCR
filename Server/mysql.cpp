@@ -4,21 +4,24 @@ MySql::MySql()
 
 }
 
-void MySql::initsql(QString ip,QString password)
+void MySql::initsql(QString ip,QString username,QString password)
 {
-//    if(ip==""){
-//        QMessageBox::information(0,"信息提示","请输入数据库ip地址",QMessageBox::Ok);
-//    }else{
+    if(ip==""){
+        QMessageBox::information(0,"信息提示","请输入数据库ip地址",QMessageBox::Ok);
+    }
+    else if(username==""){
+        username="root";
+    }
+    else{
         QSqlDatabase db=QSqlDatabase::addDatabase("QMYSQL");
         db.setHostName(ip);
-        db.setUserName("root");
+        db.setUserName(username);
         db.setPassword(password);
         db.setDatabaseName("user");
         if(db.open())
         {
             qDebug()<<"Database connected successfully!";
             QMessageBox::information(0,"信息提示","数据库连接成功!",QMessageBox::Ok);
-            //createtable();
             return;
         }
         else
@@ -28,16 +31,15 @@ void MySql::initsql(QString ip,QString password)
             return;
         }
     }
-//}
+}
 
 void MySql::createtable()
 {
-    query=new QSqlQuery;
 
-    query->exec("create table user(name VARCHAR(30) PRIMARY KEY UNIQUE NOT NULL,passward VARCHAR(30))");
+    query.exec("create table user(name VARCHAR(30) PRIMARY KEY UNIQUE NOT NULL,passward VARCHAR(30))");
 
     /*创建root用户*/
-    query->exec("insert into user value('root', 'root')");
+    query.exec("insert into user value('root', 'root')");
 }
 
 
@@ -59,8 +61,9 @@ bool MySql::signup(QString name,QString password)
 
 QString MySql::getinfo(QString name)
 {
+    QString info;
     QString s=QString("select username,app_id,api_key,sk,token from user where username='%1' ").arg(name);
-    QString info=ExecuteSqlEx(s);
+    info=ExecuteSqlEx(s);
     return info;
 }
 
@@ -102,4 +105,9 @@ QString MySql::ExecuteSqlEx(QString strSQL){
         info="#false";
     }
     return info;
+}
+
+bool MySql::modify(QString username,QString AppID,QString APIK,QString SK,QString token){
+    QString s=QString("update user set app_id='%1',api_key='%2',sk='%3',token='%4' where username='%5' ").arg(AppID).arg(APIK).arg(SK).arg(token).arg(username);
+    return ExecuteSql(s);
 }

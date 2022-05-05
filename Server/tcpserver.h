@@ -21,6 +21,7 @@ public:
     QString checkSignIn(QString name,QString passward);
     bool checkSignUp(QString name,QString passward);
     QString getinfo(QString name);
+    bool checkModify(QString username,QString AppID,QString APIK,QString SK,QString token);
 
 protected:
     void init();                         // 初始化函数用于完成一些诸如信号与槽之间的联系和变量初始化工作
@@ -40,6 +41,7 @@ private:
     QTcpSocket *tcpSocket;
     QTcpServer *tcpServer;
     QString ip;
+    QString username;
     QString password;
     MySql ms;
 };
