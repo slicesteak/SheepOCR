@@ -107,7 +107,7 @@ void Widget::initUi()
     ui->lay_bg->setMargin(12);
 
     //Logo
-    QPixmap logo(":/icons/logo.png");
+    QPixmap logo(":/icons/sheep.png");
     ui->lab_logo->setPixmap(logo);
 
     //itemLogo
@@ -140,7 +140,7 @@ void Widget::initMember()
     connect(myMbox,SIGNAL(btnchicked(int)),this,SLOT(changeMboxReturn(int)));
 
     //最小化到托盘
-    QIcon icon = QIcon(":/icons/logo.png");//设置最小图标
+    QIcon icon = QIcon(":/icons/sheep.png");//设置最小图标
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setIcon(icon);
     trayIcon->setToolTip("Peach"); //提示文字
@@ -232,6 +232,14 @@ void Widget::on_btn_main_item_4_clicked()
 {
     ui->sw_main->setCurrentIndex(3);
 }
+
+void Widget::on_btn_menu_item_4_clicked()
+{
+    status=B;
+    this->hide();
+    this->ball->show();
+}
+
 
 void Widget::on_btn_logout_clicked()
 {

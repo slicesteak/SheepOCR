@@ -38,6 +38,8 @@ suspendball::suspendball(QWidget *parent) :
     ////    样式添加到lable中
     //    ui->label->setStyleSheet(m_ball_SheetStyle);
 
+    //ui->label->setMaximumSize(QSize(48, 48));
+
     QPixmap *pixw;
      pixw = new QPixmap(ui->label->size());
       pixw->load(":/icons/sheep.png");

@@ -54,6 +54,7 @@ private slots:
 
     void on_btn_menu_item_6_clicked();
 
+    void on_btn_menu_item_4_clicked();
 
     void slot_changebacktoselectmode();
 

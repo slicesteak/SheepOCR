@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>NEU-OCR</string>
+   <string>小羊咩咩OCR欢迎您</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="qss.qrc">
+    <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
   </property>
   <widget class="QPushButton" name="sendBtn">
    <property name="geometry">
@@ -101,6 +105,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="qss.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -32,7 +32,7 @@ void TcpClient::connectServer()
         connected=1;
     }
     else{
-        QMessageBox::information(this,"信息提示","连接服务器超时!",QMessageBox::Ok);
+        //QMessageBox::information(this,"信息提示","连接服务器超时!",QMessageBox::Ok);
         connected=0;
     }
     connect(tcpSocket,SIGNAL(readyRead()),this,SLOT(readMessages()));
