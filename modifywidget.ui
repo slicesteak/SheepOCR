@@ -26,12 +26,12 @@
     <item>
      <widget class="QLabel" name="label_7">
       <property name="text">
-       <string>API Key：</string>
+       <string>AppID：</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="SKLineEdit">
+     <widget class="QLineEdit" name="AppIDLineEdit">
       <property name="font">
        <font>
         <pointsize>5</pointsize>
@@ -67,12 +67,12 @@
     <item>
      <widget class="QLabel" name="label_6">
       <property name="text">
-       <string>AppID：</string>
+       <string>API Key：</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="AppIDLineEdit"/>
+     <widget class="QLineEdit" name="APIKLineEdit"/>
     </item>
    </layout>
   </widget>
@@ -94,7 +94,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="APIKLineEdit"/>
+     <widget class="QLineEdit" name="SKLineEdit"/>
     </item>
    </layout>
   </widget>

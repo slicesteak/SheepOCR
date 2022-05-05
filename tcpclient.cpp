@@ -67,11 +67,25 @@ void TcpClient::readMessages()
         accessToken=list[6];
         info_ready=1;
         login_status=1;
-        QMessageBox::information(this,"信息提示","登录成功!",QMessageBox::Ok);
+        //QMessageBox::information(this,"信息提示","登录成功!",QMessageBox::Ok);
     }
     else if(list[0]=="b" && list[1]=="false"){
         login_status=0;
         QMessageBox::information(this,"信息提示","登录失败,用户名或密码错误!",QMessageBox::Ok);
+    }
+    else if(list[0]=="c" && list[1]=="false"){
+        QMessageBox::information(this,"信息提示","麻了!",QMessageBox::Ok);
+    }
+    else if(list[0]=="c" && list[1]=="true"){
+        info_ready=3;
+    }
+    else if(list[0]=="d"){
+        UName=list[2];
+        app_id=list[3];
+        api_key=list[4];
+        secret_key=list[5];
+        accessToken=list[6];
+        info_ready=2;
     }
     else
         return;

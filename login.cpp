@@ -39,6 +39,11 @@ void Login::on_signBtn_clicked()
 void Login::on_sendBtn_clicked()
 {
     if (client.get_status()){
+        client.init();
+        client.connectServer();
+        while(!client.get_status()){
+            QCoreApplication::processEvents();
+        }
         QString userName=ui->userLineEdit->text();
         QString passward=ui->passwardLineEdit->text();
         if(userName=="" || passward=="")

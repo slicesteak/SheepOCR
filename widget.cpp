@@ -5,7 +5,6 @@
 #include <QGraphicsDropShadowEffect>
 #include<QtDebug>
 #include "login.h"
-#include <Qtsql>
 #include <qfiledialog.h>
 #include <QDesktopWidget>
 //extern QString  UName;
@@ -15,7 +14,6 @@ Widget::Widget(QWidget *parent,QString UName,QString app_id,QString api_key,QStr
     QWidget(parent),
     ui(new Ui::Widget)
 {
-
     this->UName=UName;
     this->app_id=app_id;
     this->api_key=api_key;
@@ -91,6 +89,25 @@ Widget::Widget(QWidget *parent,QString UName,int guest_flag) :
 Widget::~Widget()
 {
     delete ui;
+}
+
+void Widget::update(){ //更新修改后的信息
+    client.init();
+    client.connectServer();
+     while(!client.get_status()){
+         QCoreApplication::processEvents();
+     }
+    QString ds="d";
+    QString data=ds+"#"+this->UName;
+    client.write(data);
+    while(client.info_ready!=2){
+        QCoreApplication::processEvents();
+    }
+    this->UName=client.UName;
+    this->app_id=client.app_id;
+    this->api_key=client.api_key;
+    this->secret_key=client.secret_key;
+    this->accessToken=client.accessToken;
 }
 
 /**********************************************************初始化函数****************************************************************/
@@ -326,23 +343,11 @@ void Widget::on_btn_mine_clicked()
 
     }
     else{
-//        QString Username,PW,ID,APIK,SK,Token;
-//        QString s=QString("select username,app_id,api_key,sk,token from user where username='%1' ").arg(UName);
-//        //查询数据库如果账号和密码匹配返回真否则返回假
-//        QSqlQuery query;
-//        query.exec(s);
-//        while(query.next()){
-//            Username=query.value(0).toString();
-//            ID=query.value(1).toString();
-//            APIK=query.value(2).toString();
-//            SK=query.value(3).toString();
-//            Token=query.value(4).toString();
-//        }
-       // cw=new ConfigWidget(nullptr,Username,ID,APIK,SK,Token);
         cw=new ConfigWidget(nullptr,this->UName,this->app_id,this->api_key,this->secret_key,this->accessToken);
         this->hide();
         cw->show();
         cw->exec();
+        update();
         this->show();
 
     }

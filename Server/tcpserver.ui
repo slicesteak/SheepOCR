@@ -31,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>37</x>
-      <y>53</y>
+      <y>27</y>
       <width>351</width>
       <height>51</height>
      </rect>
@@ -52,8 +52,8 @@
    <widget class="QWidget" name="layoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>130</y>
+      <x>38</x>
+      <y>86</y>
       <width>351</width>
       <height>51</height>
      </rect>
@@ -61,6 +61,32 @@
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>数据库用户名：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="usernameLineEdit">
+       <property name="echoMode">
+        <enum>QLineEdit::Normal</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>37</x>
+      <y>148</y>
+      <width>351</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_3">
        <property name="text">
         <string>数据库密码：</string>
        </property>

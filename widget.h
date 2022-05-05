@@ -76,6 +76,8 @@ private slots:
 private:
     Ui::Widget *ui;
 
+    void update();
+
     MyMessageBox *myMbox;
     //自定义窗口通信参数
     int mbox_return;
