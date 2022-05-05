@@ -104,7 +104,19 @@
     <string>游客模式</string>
    </property>
   </widget>
+  <zorder>passBtn</zorder>
+  <zorder>sendBtn</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>signBtn</zorder>
+  <zorder>layoutWidget_2</zorder>
  </widget>
+ <tabstops>
+  <tabstop>userLineEdit</tabstop>
+  <tabstop>passwardLineEdit</tabstop>
+  <tabstop>sendBtn</tabstop>
+  <tabstop>passBtn</tabstop>
+  <tabstop>signBtn</tabstop>
+ </tabstops>
  <resources>
   <include location="qss.qrc"/>
  </resources>
