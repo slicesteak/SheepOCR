@@ -72,6 +72,8 @@ void OpticalSever::scanPic()
     QBuffer buffer(&imageData);
     img.save(&buffer,"png");    
     this->imgBase64 = QUrl::toPercentEncoding(imageData.toBase64());
+    if(DEBUG_OUT_PUT)
+        qDebug()<<imgBase64;
     buffer.close();
 }
 
