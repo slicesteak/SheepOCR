@@ -319,7 +319,7 @@
             <item>
              <widget class="QTextEdit" name="picPath">
               <property name="placeholderText">
-               <string>请输入文件地址</string>
+               <string>请拖动文件到此处，也可点击上传按钮上传图片</string>
               </property>
              </widget>
             </item>
