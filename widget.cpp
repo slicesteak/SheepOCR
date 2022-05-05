@@ -6,6 +6,7 @@
 #include<QtDebug>
 #include "login.h"
 #include <Qtsql>
+#include <qfiledialog.h>
 #include <QDesktopWidget>
 //extern QString  UName;
 
@@ -162,6 +163,7 @@ void Widget::initMember()
     trayIconMenu->addAction(quitAction);
     trayIcon->setContextMenu(trayIconMenu);
 
+    trayIcon->show();
     //创建截图模块
     this->myscreenwidget = ScreenWidget::Instance();
     //创建浮动小球
@@ -249,6 +251,12 @@ void Widget::on_btn_logout_clicked()
 void Widget::on_btn_littleshow_clicked()
 {
     showMinimized();
+}
+
+void Widget::on_btn_menu_item_1_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("选择图片上传"), ".", tr("Images (*.png *.xpm *.jpg)"));
+    ui->picPath->setText(fileName);
 }
 
 void Widget::on_btn_menu_item_3_clicked()
