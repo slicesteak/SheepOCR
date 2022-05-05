@@ -29,6 +29,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     configwidget.cpp \
+    donate.cpp \
+    helpinfo.cpp \
     login.cpp \
         main.cpp \
     modifywidget.cpp \
@@ -43,6 +45,8 @@ SOURCES += \
 
 HEADERS += \
     configwidget.h \
+    donate.h \
+    helpinfo.h \
     httpSDK-cpp/ocr.h \
     login.h \
     modifywidget.h \
@@ -57,6 +61,8 @@ HEADERS += \
 
 FORMS += \
     configwidget.ui \
+    donate.ui \
+    helpinfo.ui \
     login.ui \
     modifywidget.ui \
     suspendball.ui \

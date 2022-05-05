@@ -274,7 +274,7 @@ QString OpticalSever::getResult(){
         QTimer timer;
         timer.setInterval(5000);
         timer.setSingleShot(true);
-    //    connect(&timer,timer.timeout(QTimer::timeout()),this,infoNotice(0));
+        //connect(&timer,timer.timeout(QTimer::timeout()),this,infoNotice(0));
 
        QEventLoop eventLoop;
        connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);

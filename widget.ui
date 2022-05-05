@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="qss.qrc">
-    <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
+    <normaloff>:/icons/baiyang.ico</normaloff>:/icons/baiyang.ico</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -140,7 +140,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>小羊咩咩OCR</string>
+                 <string>小羊咩咩</string>
                 </property>
                </widget>
               </item>
@@ -359,7 +359,7 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>我是一颗小花</string>
+                  <string>点击帮助查看说明</string>
                  </property>
                 </widget>
                </item>
@@ -506,7 +506,7 @@
                 </property>
                 <property name="icon">
                  <iconset resource="qss.qrc">
-                  <normaloff>:/icons/phone.png</normaloff>:/icons/phone.png</iconset>
+                  <normaloff>:/icons/help.png</normaloff>:/icons/help.png</iconset>
                 </property>
                 <property name="toolButtonStyle">
                  <enum>Qt::ToolButtonTextUnderIcon</enum>
@@ -537,7 +537,7 @@
                 </property>
                 <property name="icon">
                  <iconset resource="qss.qrc">
-                  <normaloff>:/icons/modular.png</normaloff>:/icons/modular.png</iconset>
+                  <normaloff>:/icons/pic.png</normaloff>:/icons/pic.png</iconset>
                 </property>
                 <property name="toolButtonStyle">
                  <enum>Qt::ToolButtonTextUnderIcon</enum>
@@ -568,7 +568,7 @@
                 </property>
                 <property name="icon">
                  <iconset resource="qss.qrc">
-                  <normaloff>:/icons/money.png</normaloff>:/icons/money.png</iconset>
+                  <normaloff>:/icons/OCR.png</normaloff>:/icons/OCR.png</iconset>
                 </property>
                 <property name="toolButtonStyle">
                  <enum>Qt::ToolButtonTextUnderIcon</enum>
@@ -627,6 +627,10 @@
                 </property>
                 <property name="text">
                  <string>赞赏</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="qss.qrc">
+                  <normaloff>:/icons/money.png</normaloff>:/icons/money.png</iconset>
                 </property>
                 <property name="toolButtonStyle">
                  <enum>Qt::ToolButtonTextUnderIcon</enum>

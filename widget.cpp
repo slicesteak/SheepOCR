@@ -15,6 +15,9 @@ Widget::Widget(QWidget *parent,QString UName,QString app_id,QString api_key,QStr
     ui(new Ui::Widget)
 {
 
+    helpinfowidget = new helpinfo();//创建新界面窗口
+    donatewidget = new donate();//创建新界面窗口
+
     this->UName=UName;
     this->app_id=app_id;
     this->api_key=api_key;
@@ -27,6 +30,7 @@ Widget::Widget(QWidget *parent,QString UName,QString app_id,QString api_key,QStr
     this->setProperty("canMove",true);
     this->initUi();
     this->initMember();
+
 
     status =  W;//初始化时设置当前状态为主窗口
 
@@ -56,6 +60,9 @@ Widget::Widget(QWidget *parent,QString UName,int guest_flag) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
+    helpinfowidget = new helpinfo();//创建新界面窗口
+    donatewidget = new donate();//创建新界面窗口
+
     this->UName=UName;
     this->myOCR=new OpticalSever(0);
     this->guest_flag=guest_flag;
@@ -65,6 +72,7 @@ Widget::Widget(QWidget *parent,QString UName,int guest_flag) :
     this->initMember();
 
     status =  W;//初始化时设置当前状态为主窗口
+
 
     ui->sw_main->setCurrentIndex(1);
 
@@ -107,7 +115,7 @@ void Widget::initUi()
     ui->lay_bg->setMargin(12);
 
     //Logo
-    QPixmap logo(":/icons/sheep.png");
+    QPixmap logo(":/icons/baiyang32.png");
     ui->lab_logo->setPixmap(logo);
 
     //itemLogo
@@ -303,14 +311,6 @@ void Widget::on_btn_menu_item_3_clicked()
     ui->picPath->clear();
 }
 
-void Widget::on_btn_menu_item_6_clicked()
-{
-
-}
-
-
-
-
 
 void Widget::on_btn_mine_clicked()
 {
@@ -389,6 +389,24 @@ void Widget::on_btn_menu_item_2_clicked()
     myscreenwidget->showFullScreen();
        //直接调用实例
 //    ui->picPath->setText(QString("%1/screen_%2.png").arg(qApp->applicationDirPath()).arg("temp"));
+}
+
+
+
+//帮助信息
+void Widget::on_btn_menu_item_5_clicked()
+{
+    helpinfowidget->setWindowModality(Qt::ApplicationModal);//设置模态
+    helpinfowidget->setWindowFlags(helpinfowidget->windowFlags()&~Qt::WindowMaximizeButtonHint&~Qt::WindowMinimizeButtonHint);
+    helpinfowidget->show();//显示当前新创建的界面窗口
+}
+
+//赞赏信息
+void Widget::on_btn_menu_item_6_clicked()
+{
+    donatewidget->setWindowModality(Qt::ApplicationModal);//设置模态
+    donatewidget->setWindowFlags(donatewidget->windowFlags()&~Qt::WindowMaximizeButtonHint&~Qt::WindowMinimizeButtonHint);
+    donatewidget->show();//显示当前新创建的界面窗口
 }
 
 

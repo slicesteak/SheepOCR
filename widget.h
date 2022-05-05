@@ -17,6 +17,8 @@
 #include<suspendball.h>
 
 #include "tcpclient.h"
+#include"helpinfo.h"
+#include"donate.h"
 
 namespace Ui {
 class Widget;
@@ -71,6 +73,8 @@ private slots:
     void on_btn_menu_item_2_clicked();
 
 
+    void on_btn_menu_item_5_clicked();
+
 private:
     Ui::Widget *ui;
 
@@ -107,6 +111,9 @@ private:
     QString accessToken;
 
     TcpClient client;//用于与服务器连接
+
+    helpinfo *helpinfowidget;
+    donate *donatewidget;
 };
 
 #endif // WIDGET_H

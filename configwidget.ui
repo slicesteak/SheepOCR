@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>用户信息</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="qss.qrc">
+    <normaloff>:/icons/baiyang32.png</normaloff>:/icons/baiyang32.png</iconset>
+  </property>
   <widget class="QWidget" name="layoutWidget_4">
    <property name="geometry">
     <rect>
@@ -157,6 +161,8 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="qss.qrc"/>
+ </resources>
  <connections/>
 </ui>

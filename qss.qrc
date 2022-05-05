@@ -5,11 +5,6 @@
         <file>icons/home.png</file>
         <file>icons/logout.png</file>
         <file>icons/setting.png</file>
-        <file>icons/member.png</file>
-        <file>icons/modular.png</file>
-        <file>icons/money.png</file>
-        <file>icons/phone.png</file>
-        <file>icons/umbrella.png</file>
         <file>icons/mini.png</file>
         <file>icons/item_01.png</file>
         <file>icons/item_02.png</file>
@@ -26,5 +21,16 @@
         <file>icons/sheep.png</file>
         <file>icons/logo.png</file>
         <file>icons/logo24.ico</file>
+        <file>icons/baiyang.png</file>
+        <file>icons/member.png</file>
+        <file>icons/OCR.png</file>
+        <file>icons/help.png</file>
+        <file>icons/money.png</file>
+        <file>icons/pic.png</file>
+        <file>icons/umbrella.png</file>
+        <file>icons/baiyang.ico</file>
+        <file>icons/baiyang32.png</file>
+        <file>icons/helpinfopic.png</file>
+        <file>icons/donatepic.png</file>
     </qresource>
 </RCC>

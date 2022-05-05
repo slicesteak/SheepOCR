@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="qss.qrc">
-    <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
+    <normaloff>:/icons/baiyang32.png</normaloff>:/icons/baiyang32.png</iconset>
   </property>
   <widget class="QPushButton" name="sendBtn">
    <property name="geometry">

@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="qss.qrc">
+    <normaloff>:/icons/baiyang32.png</normaloff>:/icons/baiyang32.png</iconset>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <widget class="QWidget" name="w_bg" native="true">
