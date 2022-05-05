@@ -25,5 +25,6 @@
         <file>icons/up.png</file>
         <file>icons/sheep.png</file>
         <file>icons/logo.png</file>
+        <file>icons/logo24.ico</file>
     </qresource>
 </RCC>
