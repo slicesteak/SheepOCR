@@ -1,8 +1,8 @@
 #include "tcpclient.h"
 #include "widget.h"
 
-#define ip "114.116.223.74"
-#define port 3306
+#define ip "127.0.0.1"
+#define port 8000
 
 TcpClient::TcpClient(QWidget *parent) :
     QMainWindow(parent)

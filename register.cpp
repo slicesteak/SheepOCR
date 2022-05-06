@@ -69,6 +69,10 @@ void Registerwindow::confirm_slots()
         QString as="a";
         QString data=as+"#"+userName+"#"+passward;
         client.write(data);
+        while(client.register_status!=1){
+            QCoreApplication::processEvents();
+        }
+        this->close();
         //timer->start(10);
     }
 
