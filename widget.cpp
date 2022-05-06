@@ -14,9 +14,6 @@ Widget::Widget(QWidget *parent,QString UName,QString app_id,QString api_key,QStr
     QWidget(parent),
     ui(new Ui::Widget)
 {
-
-    helpinfowidget = new helpinfo();//创建新界面窗口
-    donatewidget = new donate();//创建新界面窗口
     this->UName=UName;
     this->app_id=app_id;
     this->api_key=api_key;
@@ -59,8 +56,6 @@ Widget::Widget(QWidget *parent,QString UName,int guest_flag) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
-    helpinfowidget = new helpinfo();//创建新界面窗口
-    donatewidget = new donate();//创建新界面窗口
 
     this->UName=UName;
     this->myOCR=new OpticalSever(0);
@@ -412,17 +407,21 @@ void Widget::on_btn_menu_item_2_clicked()
 //帮助信息
 void Widget::on_btn_menu_item_5_clicked()
 {
+    helpinfowidget = new helpinfo();//创建新界面窗口
     helpinfowidget->setWindowModality(Qt::ApplicationModal);//设置模态
     helpinfowidget->setWindowFlags(helpinfowidget->windowFlags()&~Qt::WindowMaximizeButtonHint&~Qt::WindowMinimizeButtonHint);
     helpinfowidget->show();//显示当前新创建的界面窗口
+    //this->show();
 }
 
 //赞赏信息
 void Widget::on_btn_menu_item_6_clicked()
 {
+    donatewidget = new donate();//创建新界面窗口
     donatewidget->setWindowModality(Qt::ApplicationModal);//设置模态
     donatewidget->setWindowFlags(donatewidget->windowFlags()&~Qt::WindowMaximizeButtonHint&~Qt::WindowMinimizeButtonHint);
     donatewidget->show();//显示当前新创建的界面窗口
+    //this->show();
 }
 
 
