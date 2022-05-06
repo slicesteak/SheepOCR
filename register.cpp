@@ -56,10 +56,14 @@ Registerwindow::Registerwindow(QWidget *parent)
 void Registerwindow::confirm_slots()
 {
     QString UName = UserNameEdit->text();
-    //QString email = EmailEdit->text();
-    QString Pword;
-    if(PasswordEdit->text()==RePasswordEdit->text())
-    {
+    QString Pword=PasswordEdit->text();
+    QString Repassword=RePasswordEdit->text();
+    if(UName=="" || Pword==""||Repassword=="")
+            QMessageBox::information(this,"警告","输入不能为空",QMessageBox::Ok);
+    else if(Pword!=Repassword)
+        QMessageBox::information(this,"警告","密码不重复，请重试！！！");
+    else{
+
         Pword = PasswordEdit->text();
         QString i=QString("insert into user(username,password) values ('%1','%2'); ").arg(UName).arg(Pword);
         QString S =QString("select * from user where username='%1' ").arg(UName);
@@ -72,15 +76,13 @@ void Registerwindow::confirm_slots()
         }
         else if(query.exec(S)&&query.first()){
             QMessageBox::warning(NULL,"Error","用户名重复，请重试！！！");
-            this->close();
+            //this->close();
         }
         else{
             QMessageBox::warning(NULL,"Error","注册失败，请重试！！！");
-            this->close();
+            //this->close();
         }
     }
-    else
-        QMessageBox::warning(NULL,"Error","密码不重复，请重试！！！");
 }
 
 Registerwindow::~Registerwindow()

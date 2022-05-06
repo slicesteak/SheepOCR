@@ -109,13 +109,10 @@ void Widget::update(){ //更新修改后的信息
             this->api_key=query.value(2).toString();
             this->secret_key=query.value(3).toString();
             this->accessToken=query.value(4).toString();
-            qDebug()<<this->app_id;
-            qDebug()<<this->api_key;
-            qDebug()<<this->secret_key;
         }
     }
     else{
-        qDebug()<<"!!";
+        qDebug()<<"Widge::update()查询数据库出错";
     }
 }
 
@@ -348,9 +345,7 @@ void Widget::on_btn_mine_clicked()
         this->hide();
         cw->show();
         cw->exec();
-        qDebug()<<"111";
         this->update();
-        qDebug()<<"222";
         this->show();
 
     }
