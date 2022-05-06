@@ -7,7 +7,7 @@
 #include "login.h"
 #include <qfiledialog.h>
 #include <QDesktopWidget>
-//extern QString  UName;
+#include<QtSql>
 
 //非游客模式构造函数
 Widget::Widget(QWidget *parent,QString UName,QString app_id,QString api_key,QString secret_key,QString token,int guest_flag) :
@@ -100,22 +100,23 @@ Widget::~Widget()
 }
 
 void Widget::update(){ //更新修改后的信息
-    client.init();
-    client.connectServer();
-     while(!client.get_status()){
-         QCoreApplication::processEvents();
-     }
-    QString ds="d";
-    QString data=ds+"#"+this->UName;
-    client.write(data);
-    while(client.info_ready!=2){
-        QCoreApplication::processEvents();
+    QString s=QString("select username,app_id,api_key,sk,token from user where username='%1' ").arg(UName);//数据库存储用户名用username
+    //查询数据库如果账号和密码匹配返回真否则返回假
+    QSqlQuery query;
+    if(query.exec(s)){
+        while(query.next()){
+            this->app_id=query.value(1).toString();
+            this->api_key=query.value(2).toString();
+            this->secret_key=query.value(3).toString();
+            this->accessToken=query.value(4).toString();
+            qDebug()<<this->app_id;
+            qDebug()<<this->api_key;
+            qDebug()<<this->secret_key;
+        }
     }
-    this->UName=client.UName;
-    this->app_id=client.app_id;
-    this->api_key=client.api_key;
-    this->secret_key=client.secret_key;
-    this->accessToken=client.accessToken;
+    else{
+        qDebug()<<"!!";
+    }
 }
 
 /**********************************************************初始化函数****************************************************************/
@@ -347,7 +348,9 @@ void Widget::on_btn_mine_clicked()
         this->hide();
         cw->show();
         cw->exec();
-        update();
+        qDebug()<<"111";
+        this->update();
+        qDebug()<<"222";
         this->show();
 
     }

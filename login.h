@@ -6,8 +6,7 @@
 #include "widget.h"
 #include <QtNetwork>
 #include"mymessagebox.h"
-#include"tcpclient.h"
-//#define CONNECT_DB 0//数据库开关，1连接数据库，其他不连数据库
+
 
 
 namespace Ui {
@@ -34,7 +33,6 @@ private:
 
     Ui::Login *ui;
 
-    TcpClient client;
 };
 
 #endif // Login_H

@@ -6,8 +6,6 @@ ModifyWidget::ModifyWidget(QWidget *parent,QString Username,QString ID,QString A
     QDialog(parent),
     ui(new Ui::ModifyWidget)
 {
-    client.init();
-    client.connectServer();
     this->username=Username;
     this->app_id=ID;
     this->api_key=APIK;
@@ -32,20 +30,12 @@ ModifyWidget::~ModifyWidget()
 
 void ModifyWidget::on_confirmBtn_clicked()
 {
-    while(!client.get_status()){
-        QCoreApplication::processEvents();
-        qDebug()<<"wwwww";
-    }qDebug()<<"hhhhh";
     QString AppID=ui->AppIDLineEdit->text();
     QString APIK=ui->APIKLineEdit->text();
     QString SK=ui->SKLineEdit->text();
     QString token=ui->TokenLineEdit->text();
-    QString cs="c";
-    QString data=cs+"#"+this->username+"#"+AppID+"#"+APIK+"#"+SK+"#"+token;
-    client.write(data);
-    while(client.info_ready!=3){
-        QCoreApplication::processEvents();
-        qDebug()<<client.info_ready;
-    }qDebug()<<"yyyyy";
+    QString s=QString("update user set app_id='%1',api_key='%2',sk='%3',token='%4' where username='%5' ").arg(AppID).arg(APIK).arg(SK).arg(token).arg(this->username);
+    QSqlQuery query;
+    query.exec(s);
     this->hide();
 }

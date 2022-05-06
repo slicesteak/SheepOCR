@@ -6,9 +6,7 @@
 #include <QComboBox>
 #include <QTextEdit>
 #include <QGridLayout>
-#include <QtNetwork>
-#include<QTimer>
-#include "tcpclient.h"
+
 class Registerwindow:public QDialog
 {
     Q_OBJECT
@@ -33,8 +31,6 @@ private:
     QPushButton *confirm;
     QPushButton *resetting;
     //声明槽
-
-    TcpClient client;//用于与服务器连接
 public slots:
     void confirm_slots();
 

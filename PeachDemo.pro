@@ -38,7 +38,6 @@ SOURCES += \
     register.cpp \
     screenwidget.cpp \
     suspendball.cpp \
-    tcpclient.cpp \
         widget.cpp \
     appinit.cpp \
     mymessagebox.cpp
@@ -54,7 +53,6 @@ HEADERS += \
     register.h \
     screenwidget.h \
     suspendball.h \
-    tcpclient.h \
         widget.h \
     appinit.h \
     mymessagebox.h

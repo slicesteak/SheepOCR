@@ -16,7 +16,6 @@
 #include "modifywidget.h"
 #include<suspendball.h>
 
-#include "tcpclient.h"
 #include"helpinfo.h"
 #include"donate.h"
 
@@ -114,7 +113,6 @@ private:
     QString secret_key;
     QString accessToken;
 
-    TcpClient client;//用于与服务器连接
 
     helpinfo *helpinfowidget;
     donate *donatewidget;
