@@ -32,6 +32,7 @@ private:
     Widget* w;
 
     Ui::Login *ui;
+    int connected;
 
 };
 
