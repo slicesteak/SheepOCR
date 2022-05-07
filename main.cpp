@@ -12,6 +12,7 @@
 int main(int argc, char *argv[])
 {
 
+    QApplication::addLibraryPath("./plugins");
     QApplication a(argc, argv);
     //加载样式表
     QFile file(":/css/index.css");

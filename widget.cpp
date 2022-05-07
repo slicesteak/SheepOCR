@@ -173,7 +173,7 @@ void Widget::initMember()
     quitAction->setObjectName("quitAction");
     quitAction->setIcon(QIcon(":/icons/out.png"));
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));           //绑定槽函数退出
-    connect(returnNormal, SIGNAL(triggered()), this, SLOT(showNormal()));   //绑定槽函数还原界面
+    connect(returnNormal, SIGNAL(triggered()), this, SLOT(myshow()));   //绑定槽函数还原界面
 
     //创建托盘菜单(必须先创建动作，后添加菜单项，还可以加入菜单项图标美化)
     trayIconMenu = new QMenu(this);
