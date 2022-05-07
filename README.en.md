@@ -21,7 +21,7 @@ If you want to compile and run from the source code, make sure to configure the 
 - This software takes MySQL database as the storage part. Please copy from the ```(MySQL installation directory)/lib/libmysql.dll```  into the build directory. Click [here](https://blog.csdn.net/ysyut/article/details/108038100?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165081046816782390548548%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=165081046816782390548548&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-7-108038100.142%5ev9%5epc_search_result_cache,157%5ev4%5econtrol&utm_term=qt%E9%85%8D%E7%BD%AEmysql&spm=1018.2226.3001.4187) for detailed configuration information
 
 #### Runtime Notice
-the online database is  supported until 4:30 on May 10, 2022. If you run this program before this date, you can directly use the following account:
+the online database is  supported until 23:50 on May 16, 2022. If you run this program before this date, you can directly use the following account:
 
 - Account：vfish  | password：myOCR666
 - Account：xuexue | password：123456
