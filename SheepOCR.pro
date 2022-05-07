@@ -12,7 +12,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 RC_ICONS = logo.ico
 
-TARGET = PeachDemo
+TARGET = SheepOCR
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use

@@ -412,11 +412,12 @@ void Widget::on_btn_menu_item_5_clicked()
 //赞赏信息
 void Widget::on_btn_menu_item_6_clicked()
 {
+    this->hide();
     donatewidget = new donate();//创建新界面窗口
     donatewidget->setWindowModality(Qt::ApplicationModal);//设置模态
     donatewidget->setWindowFlags(donatewidget->windowFlags()&~Qt::WindowMaximizeButtonHint&~Qt::WindowMinimizeButtonHint);
     donatewidget->show();//显示当前新创建的界面窗口
-    //this->show();
+    this->show();
 }
 
 
