@@ -46,7 +46,6 @@ HEADERS += \
     configwidget.h \
     donate.h \
     helpinfo.h \
-    httpSDK-cpp/ocr.h \
     login.h \
     modifywidget.h \
     opticalsever.h \
