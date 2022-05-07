@@ -82,7 +82,7 @@ void Login::on_sendBtn_clicked()
                     SK=query.value(3).toString();
                     Token=query.value(4).toString();
                 }
-                w=new Widget(this,UName,ID,APIK,SK,Token,0);
+                w=new Widget(0,UName,ID,APIK,SK,Token,0);
                 w->show();
                 this->hide();
             }
@@ -115,7 +115,8 @@ void Login::on_sendBtn_clicked()
                     SK=query.value(3).toString();
                     Token=query.value(4).toString();
                 }
-                w=new Widget(this,UName,ID,APIK,SK,Token,0);
+
+                w=new Widget(0,UName,ID,APIK,SK,Token,0);
                 w->show();
                 this->hide();
             }
